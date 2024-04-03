@@ -6,7 +6,7 @@ namespace EasyESS.IdentityService
 {
     public class IdentityService
     {
-        public static void ExtractFiles(InstallationInfo info)
+        public void ExtractFiles(InstallationInfo info)
         {
             Directory.CreateDirectory(info.InstanceFolder);
             info.IdentityServiceInfo.ServiceFolder = Directory.CreateDirectory(Path.Combine(info.InstanceFolder, "IdentityService")).Name;
@@ -14,7 +14,7 @@ namespace EasyESS.IdentityService
             ZipFile.ExtractToDirectory(Path.Combine(info.IdentityServiceInfo.SourceFolder, "EssPlatformIdentityProvider2-win-x64.zip"), info.IdentityServiceInfo.ServiceFolder, true);
         }
 
-        public static void CreateDb(InstallationInfo info)
+        public void CreateDb(InstallationInfo info)
         {
             //cd C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\
             var executor = new CommandLineExecutor();
@@ -22,7 +22,7 @@ namespace EasyESS.IdentityService
             executor.Execute(@$"cd {info.SQLCmdPath}", $"sqlcmd -U {info.DBServerUser} -P {info.DBServerPassword} -S {info.DBServerName} -d {info.IdentityServiceInfo.DBName} -i {Path.Combine(info.IdentityServiceInfo.SourceFolder, "DatabaseScripts\\SqlServer\\InitializeDatabase.sql")}");
         }
 
-        public static void FillConfig(InstallationInfo info)
+        public void FillConfig(InstallationInfo info)
         {
             var configPath = Path.Combine(info.IdentityServiceInfo.ServiceFolder, "appsettings.json");
             var file = File.ReadAllText(configPath);
@@ -40,19 +40,18 @@ namespace EasyESS.IdentityService
             File.WriteAllText(configPath, file);
         }
 
-        public static void AddToIIS(InstallationInfo info)
+        public void AddToIIS(InstallationInfo info)
         {
             var executor = new CommandLineExecutor();
             executor.Execute($"cd c:\\Windows\\System32\\inetsrv", "appcmd add apppool /name:Identity /managedRuntimeVersion: /managedPipelineMode:Integrated", $"appcmd add site /name:Identity /physicalPath:{info.IdentityServiceInfo.ServiceFolder} /bindings:https/{info.IdentityServiceInfo.Host}:{info.IdentityServiceInfo.Port}:", "APPCMD.exe set app \"Identity/\" /applicationPool:\"Identity\"");
         }
 
-        public static void Install()
+        public void Install(InstallationInfo info)
         {
-            var info = new InstallationInfo();
-            info.IdentityServiceInfo = new IdentityServiceInfo();
-            info.IdentityServiceInfo.Port = "666";
-            var res = JsonConvert.SerializeObject(info, Formatting.Indented);
-            File.WriteAllText("D:\\IdsTest\\1.json", res);
+            this.ExtractFiles(info);
+            this.CreateDb(info);
+            this.FillConfig(info);
+            this.AddToIIS(info);
         }
     }
 }

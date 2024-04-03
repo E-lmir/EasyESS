@@ -12,13 +12,13 @@ namespace EasyESS.IdCLI
 {
     internal class IdCLIService
     {
-        public static void ExtractFiles(InstallationInfo info)
+        public void ExtractFiles(InstallationInfo info)
         {
             info.IdCLIServiceInfo.ServiceFolder = Directory.CreateDirectory(Path.Combine(info.InstanceFolder, "IdCLI")).Name;
             ZipFile.ExtractToDirectory(Path.Combine(info.IdCLIServiceInfo.SourceFolder, "Id-Cli-win-x64.zip"), info.IdCLIServiceInfo.ServiceFolder, true);
         }
 
-        public static void FillConfig(InstallationInfo info)
+        public void FillConfig(InstallationInfo info)
         {
             var configPath = Path.Combine(info.IdCLIServiceInfo.ServiceFolder, "appsettings.json");
             var file = File.ReadAllText(configPath);
@@ -28,10 +28,17 @@ namespace EasyESS.IdCLI
             File.WriteAllText(configPath, file);
         }
 
-        public static void AddRoles(InstallationInfo info)
+        public void AddRoles(InstallationInfo info)
         {
             var executor = new CommandLineExecutor();
             executor.Execute($"cd {info.IdCLIServiceInfo.ServiceFolder}", $"id add role \"service\"");
+        }
+
+        public void Install(InstallationInfo info)
+        {
+            this.ExtractFiles(info);
+            this.FillConfig(info);
+            this.AddRoles(info);
         }
     }
 }
