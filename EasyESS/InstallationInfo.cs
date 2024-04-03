@@ -45,6 +45,20 @@ namespace EasyESS
     {
         public string SourceFolder { get; set; }
         public string DBName { get; set; }
+        [JsonIgnore]
+        public string ServiceFolder { get; set; }
+        public Scheduler Scheduler { get; set; }
+        public WebApi WebApi { get; set; }
+    }
+    public sealed class Scheduler
+    {
+        public string Host { get; set; }
+        public string Port { get; set; }
+        [JsonIgnore]
+        public string ServiceFolder { get; set; }
+    }
+    public sealed class WebApi
+    {
         public string Host { get; set; }
         public string Port { get; set; }
         [JsonIgnore]

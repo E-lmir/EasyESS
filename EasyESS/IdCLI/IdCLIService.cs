@@ -14,7 +14,7 @@ namespace EasyESS.IdCLI
     {
         public void ExtractFiles(InstallationInfo info)
         {
-            info.IdCLIServiceInfo.ServiceFolder = Directory.CreateDirectory(Path.Combine(info.InstanceFolder, "IdCLI")).Name;
+            info.IdCLIServiceInfo.ServiceFolder = Directory.CreateDirectory(Path.Combine(info.InstanceFolder, "IdCLI")).FullName;
             ZipFile.ExtractToDirectory(Path.Combine(info.IdCLIServiceInfo.SourceFolder, "Id-Cli-win-x64.zip"), info.IdCLIServiceInfo.ServiceFolder, true);
         }
 

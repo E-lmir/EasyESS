@@ -9,7 +9,7 @@ namespace EasyESS.IdentityService
         public void ExtractFiles(InstallationInfo info)
         {
             Directory.CreateDirectory(info.InstanceFolder);
-            info.IdentityServiceInfo.ServiceFolder = Directory.CreateDirectory(Path.Combine(info.InstanceFolder, "IdentityService")).Name;
+            info.IdentityServiceInfo.ServiceFolder = Directory.CreateDirectory(Path.Combine(info.InstanceFolder, "IdentityService")).FullName;
             ZipFile.ExtractToDirectory(Path.Combine(info.IdentityServiceInfo.SourceFolder, "IdentityService-win-x64.zip"), info.IdentityServiceInfo.ServiceFolder, true);
             ZipFile.ExtractToDirectory(Path.Combine(info.IdentityServiceInfo.SourceFolder, "EssPlatformIdentityProvider2-win-x64.zip"), info.IdentityServiceInfo.ServiceFolder, true);
         }
@@ -19,7 +19,8 @@ namespace EasyESS.IdentityService
             //cd C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\
             var executor = new CommandLineExecutor();
             executor.Execute(@$"cd {info.SQLCmdPath}", $"sqlcmd -U {info.DBServerUser} -P {info.DBServerPassword} -S {info.DBServerName} -Q \"CREATE DATABASE {info.IdentityServiceInfo.DBName}\"");
-            executor.Execute(@$"cd {info.SQLCmdPath}", $"sqlcmd -U {info.DBServerUser} -P {info.DBServerPassword} -S {info.DBServerName} -d {info.IdentityServiceInfo.DBName} -i {Path.Combine(info.IdentityServiceInfo.SourceFolder, "DatabaseScripts\\SqlServer\\InitializeDatabase.sql")}");
+            var dbScriptPath = Path.Combine(info.IdentityServiceInfo.SourceFolder, "DatabaseScripts\\SqlServer\\InitializeDatabase.sql");
+            executor.Execute(@$"cd {info.SQLCmdPath}", $"sqlcmd -U {info.DBServerUser} -P {info.DBServerPassword} -S {info.DBServerName} -d {info.IdentityServiceInfo.DBName} -i {dbScriptPath}");
         }
 
         public void FillConfig(InstallationInfo info)
@@ -28,7 +29,7 @@ namespace EasyESS.IdentityService
             var file = File.ReadAllText(configPath);
             var json = JsonConvert.DeserializeObject<IdentityConfig>(file);
             json.ConnectionStrings.Database = $"ProviderName=System.Data.SqlClient;Data Source={info.DBServerName};Initial Catalog={info.IdentityServiceInfo.DBName};Integrated Security=False;User ID={info.DBServerUser};Password={info.DBServerPassword};";
-            json.ConnectionStrings.MessagingService = $"Name=Directum.Core.MessageBroker;Host={info.MessagingServiceInfo.Host};UseSsl=false;Port={info.MessagingServiceInfo.Port};";
+            json.ConnectionStrings.MessagingService = $"Name=Directum.Core.MessageBroker;Host={info.MessagingServiceInfo.WebApi.Host};UseSsl=false;Port={info.MessagingServiceInfo.WebApi.Port};";
             json.ConnectionStrings.ShortPathService = "";
             json.TokenIssuer.SigningCertificateThumbprint = info.SigningCertificateThumbprint;
             json.General.ServiceEndpoint = $"https://{info.IdentityServiceInfo.Host}:{info.IdentityServiceInfo.Port}";
@@ -43,7 +44,7 @@ namespace EasyESS.IdentityService
         public void AddToIIS(InstallationInfo info)
         {
             var executor = new CommandLineExecutor();
-            executor.Execute($"cd c:\\Windows\\System32\\inetsrv", "appcmd add apppool /name:Identity /managedRuntimeVersion: /managedPipelineMode:Integrated", $"appcmd add site /name:Identity /physicalPath:{info.IdentityServiceInfo.ServiceFolder} /bindings:https/{info.IdentityServiceInfo.Host}:{info.IdentityServiceInfo.Port}:", "APPCMD.exe set app \"Identity/\" /applicationPool:\"Identity\"");
+            executor.Execute($"cd c:\\Windows\\System32\\inetsrv", "appcmd add apppool /name:Identity19 /managedRuntimeVersion: /managedPipelineMode:Integrated", $"appcmd add site /name:Identity19 /physicalPath:{info.IdentityServiceInfo.ServiceFolder} /bindings:http/{info.IdentityServiceInfo.Host}:{info.IdentityServiceInfo.Port}:", "APPCMD.exe set app \"Identity19/\" /applicationPool:\"Identity19\"");
         }
 
         public void Install(InstallationInfo info)
