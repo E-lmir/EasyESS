@@ -38,5 +38,12 @@ namespace EasyESS.MessageBroker.Scheduler
             file = JsonConvert.SerializeObject(json, Formatting.Indented);
             File.WriteAllText(configPath, file);
         }
+
+        public void Install(InstallationInfo info)
+        {
+            this.ExtractFiles(info);
+            this.AddToIIS(info);
+            this.FillConfig(info);
+        }
     }
 }
