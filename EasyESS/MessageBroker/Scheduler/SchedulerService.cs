@@ -26,7 +26,7 @@ namespace EasyESS.MessageBroker.Scheduler
         public void AddToIIS(InstallationInfo info)
         {
             var executor = new CommandLineExecutor();
-            executor.Execute($"cd c:\\Windows\\System32\\inetsrv", "appcmd add apppool /name:Scheduler19 /managedRuntimeVersion: /managedPipelineMode:Integrated", $"appcmd add site /name:Scheduler19 /physicalPath:{info.MessagingServiceInfo.Scheduler.ServiceFolder} /bindings:http/{info.MessagingServiceInfo.Scheduler.Host}:{info.MessagingServiceInfo.Scheduler.Port}:", "APPCMD.exe set app \"Scheduler19/\" /applicationPool:\"Scheduler19\"");
+            executor.Execute($"cd c:\\Windows\\System32\\inetsrv", "appcmd add apppool /name:Scheduler19 /managedRuntimeVersion: /managedPipelineMode:Integrated", $"appcmd add site /name:Scheduler19 /physicalPath:{info.MessagingServiceInfo.Scheduler.ServiceFolder} /bindings:http/*:{info.MessagingServiceInfo.Scheduler.Port}:", "APPCMD.exe set app \"Scheduler19/\" /applicationPool:\"Scheduler19\"");
         }
 
         public void FillConfig(InstallationInfo info)

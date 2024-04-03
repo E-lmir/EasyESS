@@ -44,7 +44,7 @@ namespace EasyESS.IdentityService
         public void AddToIIS(InstallationInfo info)
         {
             var executor = new CommandLineExecutor();
-            executor.Execute($"cd c:\\Windows\\System32\\inetsrv", "appcmd add apppool /name:Identity19 /managedRuntimeVersion: /managedPipelineMode:Integrated", $"appcmd add site /name:Identity19 /physicalPath:{info.IdentityServiceInfo.ServiceFolder} /bindings:http/{info.IdentityServiceInfo.Host}:{info.IdentityServiceInfo.Port}:", "APPCMD.exe set app \"Identity19/\" /applicationPool:\"Identity19\"");
+            executor.Execute($"cd c:\\Windows\\System32\\inetsrv", "appcmd add apppool /name:Identity19 /managedRuntimeVersion: /managedPipelineMode:Integrated", $"appcmd add site /name:Identity19 /physicalPath:{info.IdentityServiceInfo.ServiceFolder} /bindings:http/*:{info.IdentityServiceInfo.Port}:", "APPCMD.exe set app \"Identity19/\" /applicationPool:\"Identity19\"");
         }
 
         public void Install(InstallationInfo info)
