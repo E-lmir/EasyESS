@@ -23,7 +23,7 @@ namespace EasyESS.StorageService
         public void AddToIIS(InstallationInfo info)
         {
             var executor = new CommandLineExecutor();
-            executor.Execute($"cd c:\\Windows\\System32\\inetsrv", "appcmd add apppool /name:Storage19 /managedRuntimeVersion: /managedPipelineMode:Integrated", $"appcmd add site /name:Storage19 /physicalPath:{info.IdentityServiceInfo.ServiceFolder} /bindings:http/*:{info.StorageServiceInfo.Port}:", "APPCMD.exe set app \"Storage19/\" /applicationPool:\"Storage19\"");
+            executor.Execute($"cd c:\\Windows\\System32\\inetsrv", "appcmd add apppool /name:Storage19 /managedRuntimeVersion: /managedPipelineMode:Integrated", $"appcmd add site /name:Storage19 /physicalPath:{info.StorageServiceInfo.ServiceFolder} /bindings:http/*:{info.StorageServiceInfo.Port}:", "APPCMD.exe set app \"Storage19/\" /applicationPool:\"Storage19\"");
         }
 
         public void FillConfig(InstallationInfo info)
@@ -31,7 +31,7 @@ namespace EasyESS.StorageService
             var configPath = Path.Combine(info.StorageServiceInfo.ServiceFolder, "appsettings.json");
             var file = File.ReadAllText(configPath);
             var json = JsonConvert.DeserializeObject<StorageConfig>(file);
-            var path = Path.Combine(info.StorageServiceInfo.ServiceFolder, "storage");
+            var path = Path.Combine(info.StorageServiceInfo.ServiceFolder, info.StorageServiceInfo.FileStoragePath);
             Directory.CreateDirectory(path);
             json.General.FileStoragePath = path;
             json.Authentication.SigningCertificateThumbprint = info.SigningCertificateThumbprint;
@@ -42,6 +42,7 @@ namespace EasyESS.StorageService
         public void IdCLIRegistration(InstallationInfo info)
         {
             var executor = new CommandLineExecutor();
+            File.AppendAllText("C:/idCommands.txt", $"id add resource \"Directum.Core.BlobStorageService\" -c \"{info.StorageServiceInfo.SourceFolder}\\BlobStorageServiceAudience.json\"");
             executor.Execute($"cd {info.IdCLIServiceInfo.ServiceFolder}", $"id add resource \"Directum.Core.BlobStorageService\" -c \"{info.StorageServiceInfo.SourceFolder}\\BlobStorageServiceAudience.json\"");
         }
 
