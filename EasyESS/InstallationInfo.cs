@@ -22,6 +22,7 @@ namespace EasyESS
         public IdentityServiceInfo IdentityServiceInfo { get; set; }
         public MessagingServiceInfo MessagingServiceInfo { get; set; }
         public IdCLIServiceInfo IdCLIServiceInfo { get; set; }
+        public StorageServiceInfo StorageServiceInfo { get; set; }
     }
 
     public sealed class IdentityServiceInfo
@@ -63,5 +64,15 @@ namespace EasyESS
         public string Port { get; set; }
         [JsonIgnore]
         public string ServiceFolder { get; set; }
+    }
+
+    public sealed class StorageServiceInfo
+    {
+        public string Host { get; set; }
+        public string SourceFolder { get; set; }
+        public string Port { get; set; }
+        [JsonIgnore]
+        public string ServiceFolder { get; set; }
+        public string FileStoragePath { get; set; }
     }
 }

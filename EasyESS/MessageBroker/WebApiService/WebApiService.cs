@@ -40,7 +40,7 @@ namespace EasyESS.MessageBroker.WebApiService
             var json = JsonConvert.DeserializeObject<WebApiConfig>(file);
             json.ConnectionStrings.Database = $"ProviderName=System.Data.SqlClient;Data Source={info.DBServerName};Initial Catalog={info.MessagingServiceInfo.DBName};Integrated Security=False;User ID={info.DBServerUser};Password={info.DBServerPassword};";
             json.Authentication.SigningCertificateThumbprint = info.SigningCertificateThumbprint;
-            json.Scheduler.HealthCheckUrl = $"http://{info.MessagingServiceInfo.Scheduler.Host}:{info.MessagingServiceInfo.Scheduler.Host}/health";
+            json.Scheduler.HealthCheckUrl = $"http://{info.MessagingServiceInfo.Scheduler.Host}:{info.MessagingServiceInfo.Scheduler.Port}/health";
             file = JsonConvert.SerializeObject(json, Formatting.Indented);
             File.WriteAllText(configPath, file);
         }
