@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace EasyESS.IdCLI
 {
-    internal class IdCLIService
+    public class IdCLIService
     {
         public void ExtractFiles(InstallationInfo info)
         {
