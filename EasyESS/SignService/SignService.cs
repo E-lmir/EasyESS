@@ -22,7 +22,7 @@ namespace EasyESS.SignService
         public void AddToIIS(InstallationInfo info)
         {
             var executor = new CommandLineExecutor();
-            executor.Execute($"cd c:\\Windows\\System32\\inetsrv", "appcmd add apppool /name:SignService19 /managedRuntimeVersion: /managedPipelineMode:Integrated", $"appcmd add site /name:SignService19 /physicalPath:{info.SignServiceInfo.ServiceFolder} /bindings:http/*:{info.SignServiceInfo.Port}:", "APPCMD.exe set app \"SignService19/\" /applicationPool:\"SignService19\"");
+            executor.Execute($"cd c:\\Windows\\System32\\inetsrv", "appcmd add apppool /name:SignService19 /managedRuntimeVersion: /managedPipelineMode:Integrated", $"appcmd add site /name:SignService19 /physicalPath:{info.SignServiceInfo.ServiceFolder} /bindings:https/*:{info.SignServiceInfo.Port}:", "APPCMD.exe set app \"SignService19/\" /applicationPool:\"SignService19\"");
         }
 
         public void CreateDb(InstallationInfo info)

@@ -40,7 +40,7 @@ namespace EasyESS.EssSite
         public void IdCLIRegistration(InstallationInfo info)
         {
            // var executor = new CommandLineExecutor();
-            var audiencePath = Path.Combine(info.EssServiceInfo.SourceFolder, "EssSite.json");
+            var audiencePath = Path.Combine(info.EssServiceInfo.SourceFolder, "EssSiteAudience.json");
             File.AppendAllText("C:/idCommands.txt", $"id add resource \"Directum.Core.EssSite\" -c \"{audiencePath}\" -p returnUrl=\"https://{info.EssSiteInfo.Host}:{info.EssSiteInfo.Port}\" -p originUrl=\"https://{info.EssSiteInfo.Host}:{info.EssSiteInfo.Port}\" -p icon=\"https://{info.EssSiteInfo.Host}:{info.EssSiteInfo.Port}/logo_32.png\"" + Environment.NewLine);
             //TODO Add missing commands
             // executor.Execute($"cd {info.IdCLIServiceInfo.ServiceFolder}", $"id add user \"DocServiceUser\" - p password = \"11111\"", $"id assign -u \"SignServiceUser\" -r \"service\"", $"id add resource \"Directum.Core.SignService\" -c \"{audiencePath}\"");
