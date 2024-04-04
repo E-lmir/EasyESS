@@ -66,9 +66,9 @@ namespace EasyESS.EssService
 
         public void Install(InstallationInfo info)
         {
+            this.ExtractFiles(info);
             this.CreateDb(info);
             this.IdCLIRegistration(info);
-            this.ExtractFiles(info);
             this.FillConfig(info);
             this.AddToIIS(info);
         }
