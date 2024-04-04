@@ -49,9 +49,9 @@ namespace EasyESS.EssSite
         public void Install(InstallationInfo info)
         {
             this.ExtractFiles(info);
-            this.AddToIIS(info);
             this.FillConfig(info);
             this.IdCLIRegistration(info);
+            this.AddToIIS(info);
         }
     }
 }
