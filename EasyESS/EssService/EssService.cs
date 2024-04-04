@@ -51,6 +51,8 @@ namespace EasyESS.EssService
             json.ConnectionStrings.SignService = $"Name=Directum.Core.SignService;Host={info.SignServiceInfo.Host};UseSsl=true;Port={info.SignServiceInfo.Port};";
             json.ConnectionStrings.MessagingService = $"Name=Directum.Core.MessageBroker;Host={info.MessagingServiceInfo.WebApi.Host};UseSsl=false;Port={info.MessagingServiceInfo.WebApi.Port};";
             json.ConnectionStrings.DocumentService = $"Name=Directum.Core.DocumentService;Host={info.DocumentServiceInfo.Host};UseSsl=false;Port={info.DocumentServiceInfo.Port};";
+            json.ConnectionStrings.PreviewStorage = "";
+            json.ConnectionStrings.PreviewService = "";
             json.Authentication.SigningCertificateThumbprint = info.SigningCertificateThumbprint;
             file = JsonConvert.SerializeObject(json, Formatting.Indented);
             File.WriteAllText(configPath, file);

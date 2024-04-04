@@ -21,7 +21,7 @@ namespace EasyESS.EssSite
         public void AddToIIS(InstallationInfo info)
         {
             var executor = new CommandLineExecutor();
-            executor.Execute($"cd c:\\Windows\\System32\\inetsrv", "appcmd add apppool /name:EssSite19 /managedRuntimeVersion: /managedPipelineMode:Integrated", $"appcmd add site /name:EssSite19 /physicalPath:{info.EssSiteInfo.ServiceFolder} /bindings:http/*:{info.EssSiteInfo.Port}:", "APPCMD.exe set app \"EssSite19/\" /applicationPool:\"EssSite19\"");
+            executor.Execute($"cd c:\\Windows\\System32\\inetsrv", "appcmd add apppool /name:EssSite19 /managedRuntimeVersion: /managedPipelineMode:Integrated", $"appcmd add site /name:EssSite19 /physicalPath:{info.EssSiteInfo.ServiceFolder} /bindings:https/*:{info.EssSiteInfo.Port}:", "APPCMD.exe set app \"EssSite19/\" /applicationPool:\"EssSite19\"");
         }
 
         public void FillConfig(InstallationInfo info)
@@ -39,9 +39,9 @@ namespace EasyESS.EssSite
 
         public void IdCLIRegistration(InstallationInfo info)
         {
-            var executor = new CommandLineExecutor();
-            var audiencePath = Path.Combine(info.EssServiceInfo.SourceFolder, "EssServiceAudience.json");
-            File.AppendAllText("C:/idCommands.txt", $"id add resource \"Directum.Core.EssService\" -c \"{audiencePath}\" -p returnUrl=\"https://{info.EssSiteInfo.Host}:{info.EssSiteInfo.Port}\" -p originUrl=\"https://{info.EssSiteInfo.Host}:{info.EssSiteInfo.Port}\" -p icon=\"https://{info.EssSiteInfo.Host}:{info.EssSiteInfo.Port}/logo_32.png\"" + Environment.NewLine);
+           // var executor = new CommandLineExecutor();
+            var audiencePath = Path.Combine(info.EssServiceInfo.SourceFolder, "EssSite.json");
+            File.AppendAllText("C:/idCommands.txt", $"id add resource \"Directum.Core.EssSite\" -c \"{audiencePath}\" -p returnUrl=\"https://{info.EssSiteInfo.Host}:{info.EssSiteInfo.Port}\" -p originUrl=\"https://{info.EssSiteInfo.Host}:{info.EssSiteInfo.Port}\" -p icon=\"https://{info.EssSiteInfo.Host}:{info.EssSiteInfo.Port}/logo_32.png\"" + Environment.NewLine);
             //TODO Add missing commands
             // executor.Execute($"cd {info.IdCLIServiceInfo.ServiceFolder}", $"id add user \"DocServiceUser\" - p password = \"11111\"", $"id assign -u \"SignServiceUser\" -r \"service\"", $"id add resource \"Directum.Core.SignService\" -c \"{audiencePath}\"");
         }

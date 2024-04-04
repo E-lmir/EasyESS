@@ -28,6 +28,7 @@ namespace EasyESS
         public EssServiceInfo EssServiceInfo { get; set; }
         public EssSiteInfo EssSiteInfo { get; set; }
         public RabbitMQ RabbitMQ { get; set; }
+        public EssCLIInfo EssCLIInfo { get; set; }
     }
 
     public sealed class IdentityServiceInfo
@@ -126,5 +127,12 @@ namespace EasyESS
         public string User { get; set; }
         public string Password { get; set; }
         public string VirtualHost { get; set; }
+    }
+
+    public sealed class EssCLIInfo
+    {
+        public string SourceFolder { get; set; }
+        [JsonIgnore]
+        public string ServiceFolder { get; set; }
     }
 }

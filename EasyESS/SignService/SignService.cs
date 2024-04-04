@@ -42,8 +42,8 @@ namespace EasyESS.SignService
             var json = JsonConvert.DeserializeObject<SignServiceConfig>(file);
             json.ConnectionStrings.IdentityService = $"Name=Directum.Core.IdentityService;Host={info.IdentityServiceInfo.Host};UseSsl=true;Port={info.IdentityServiceInfo.Port};User ID=DocServiceUser;Password=11111;";
             json.ConnectionStrings.StorageService = $"Name=Storage service;Host={info.StorageServiceInfo.Host};UseSsl=false;Port={info.StorageServiceInfo.Port};";
-            json.ConnectionStrings.CloudSignService = "Name=CryptoProSignService;Host=ca.foxtrot.comp.npo;Port=8007;UseSsl=false;";
-            json.ConnectionStrings.CloudAuthService = "Name=CryptoProAuthService;Host=ca.foxtrot.comp.npo;Port=8007;UseSsl=false;";
+            json.ConnectionStrings.CloudSignService = "Name=CloudSigningService;Host=ca.foxtrot.comp.npo;Port=8007;UseSsl=false;";
+            json.ConnectionStrings.CloudAuthService = "Name=CloudSigningService;Host=ca.foxtrot.comp.npo;Port=8007;UseSsl=false;";
             json.CryptoPro.OperatorLogin = "blazhnovvvdirectum";
             json.CryptoPro.OperatorPassword = "1Qwerty";
             json.CryptoPro.OperatorPassword = "1Qwerty";
@@ -79,6 +79,7 @@ namespace EasyESS.SignService
             this.FillConfig(info);
             this.AddToIIS(info);
             this.IdCLIRegistration(info);
+            this.CreateDb(info);
         }
     }
 }

@@ -16,11 +16,11 @@ namespace EasyESS.MessageBroker.Scheduler
         {
             info.MessagingServiceInfo.ServiceFolder = Directory.CreateDirectory(Path.Combine(info.InstanceFolder, "CoreMessageBroker")).FullName;
             info.MessagingServiceInfo.Scheduler.ServiceFolder = Directory.CreateDirectory(Path.Combine(info.MessagingServiceInfo.ServiceFolder, "Scheduler")).FullName;
-            ZipFile.ExtractToDirectory(Path.Combine(info.MessagingServiceInfo.SourceFolder, "Scheduler-win-x64.zip"), info.MessagingServiceInfo.Scheduler.ServiceFolder, true);
-            ZipFile.ExtractToDirectory(Path.Combine(info.MessagingServiceInfo.SourceFolder, "SmscTransport-win-x64.zip"), info.MessagingServiceInfo.Scheduler.ServiceFolder, true);
-            ZipFile.ExtractToDirectory(Path.Combine(info.MessagingServiceInfo.SourceFolder, "SmtpTransport-win-x64.zip"), info.MessagingServiceInfo.Scheduler.ServiceFolder, true);
-            ZipFile.ExtractToDirectory(Path.Combine(info.MessagingServiceInfo.SourceFolder, "MobilGroupTransport-win-x64.zip"), info.MessagingServiceInfo.Scheduler.ServiceFolder, true);
             ZipFile.ExtractToDirectory(Path.Combine(info.MessagingServiceInfo.SourceFolder, "MtsMarketologTransport-win-x64.zip"), info.MessagingServiceInfo.Scheduler.ServiceFolder, true);
+            ZipFile.ExtractToDirectory(Path.Combine(info.MessagingServiceInfo.SourceFolder, "MobilGroupTransport-win-x64.zip"), info.MessagingServiceInfo.Scheduler.ServiceFolder, true);
+            ZipFile.ExtractToDirectory(Path.Combine(info.MessagingServiceInfo.SourceFolder, "SmtpTransport-win-x64.zip"), info.MessagingServiceInfo.Scheduler.ServiceFolder, true);
+            ZipFile.ExtractToDirectory(Path.Combine(info.MessagingServiceInfo.SourceFolder, "SmscTransport-win-x64.zip"), info.MessagingServiceInfo.Scheduler.ServiceFolder, true);
+            ZipFile.ExtractToDirectory(Path.Combine(info.MessagingServiceInfo.SourceFolder, "Scheduler-win-x64.zip"), info.MessagingServiceInfo.Scheduler.ServiceFolder, true);
         }
 
         public void AddToIIS(InstallationInfo info)
@@ -35,6 +35,11 @@ namespace EasyESS.MessageBroker.Scheduler
             var file = File.ReadAllText(configPath);
             var json = JsonConvert.DeserializeObject<SchedulerConfig>(file);
             json.ConnectionStrings.Database = $"ProviderName=System.Data.SqlClient;Data Source={info.DBServerName};Initial Catalog={info.MessagingServiceInfo.DBName};Integrated Security=False;User ID={info.DBServerUser};Password={info.DBServerPassword};";
+            json.Transport.SmtpDeliveryProxy = "SMTP";
+            json.Transport.ViberDeliveryProxy = "Viber";
+            json.Transport.Proxies[0].Configuration.Username = "DIDSMS";
+            json.Transport.Proxies[0].Configuration.Password = "7863400";
+            json.Transport.Proxies[0].Configuration.Sender = "DIDSMS";
             file = JsonConvert.SerializeObject(json, Formatting.Indented);
             File.WriteAllText(configPath, file);
         }
