@@ -30,10 +30,10 @@ namespace EasyESS.Document
         {
             var executor = new CommandLineExecutor();
             var audiencePath = Path.Combine(info.DocumentServiceInfo.SourceFolder, "DocumentServiceAudience.json");
-            File.AppendAllText("C:/idCommands.txt", $"id add user \"DocServiceUser\" - p password = \"11111\"" + Environment.NewLine);
+            File.AppendAllText("C:/idCommands.txt", $"id add user \"DocServiceUser\" -p password=\"11111\"" + Environment.NewLine);
             File.AppendAllText("C:/idCommands.txt", $"id assign -u \"DocServiceUser\" -r \"service\"" + Environment.NewLine);
             File.AppendAllText("C:/idCommands.txt", $"id add resource \"Directum.Core.DocumentService\" -c \"{audiencePath}\"" + Environment.NewLine);
-            executor.Execute($"cd {info.IdCLIServiceInfo.ServiceFolder}", $"id add user \"DocServiceUser\" - p password = \"11111\"", $"id assign -u \"DocServiceUser\" -r \"service\"", $"id add resource \"Directum.Core.DocumentService\" -c \"{audiencePath}\"");
+            executor.Execute($"cd {info.IdCLIServiceInfo.ServiceFolder}", $"id add user \"DocServiceUser\" -p password=\"11111\"", $"id assign -u \"DocServiceUser\" -r \"service\"", $"id add resource \"Directum.Core.DocumentService\" -c \"{audiencePath}\"");
         }
 
         public void FillConfig(InstallationInfo info)

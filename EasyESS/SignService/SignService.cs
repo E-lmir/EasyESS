@@ -25,6 +25,16 @@ namespace EasyESS.SignService
             executor.Execute($"cd c:\\Windows\\System32\\inetsrv", "appcmd add apppool /name:SignService19 /managedRuntimeVersion: /managedPipelineMode:Integrated", $"appcmd add site /name:SignService19 /physicalPath:{info.SignServiceInfo.ServiceFolder} /bindings:http/*:{info.SignServiceInfo.Port}:", "APPCMD.exe set app \"SignService19/\" /applicationPool:\"SignService19\"");
         }
 
+        public void CreateDb(InstallationInfo info)
+        {
+            //cd C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\
+            var executor = new CommandLineExecutor();
+            var dbScriptPath = Path.Combine(info.SignServiceInfo.SourceFolder, "DatabaseScripts\\SqlServer\\InitializeDatabase.sql");
+            executor.Execute(@$"cd {info.SQLCmdPath}", $"sqlcmd -U {info.DBServerUser} -P {info.DBServerPassword} -S {info.DBServerName} -Q \"CREATE DATABASE {info.SignServiceInfo.DBName}\"");
+            executor.Execute(@$"cd {info.SQLCmdPath}", $"sqlcmd -U {info.DBServerUser} -P {info.DBServerPassword} -S {info.DBServerName} -d {info.SignServiceInfo.DBName} -i {dbScriptPath}");
+            executor.Execute(@$"cd {info.SQLCmdPath}", $"sqlcmd -U {info.DBServerUser} -P {info.DBServerPassword} -S {info.DBServerName} -d {info.SignServiceInfo.DBName} -i {dbScriptPath}");
+        }
+
         public void FillConfig(InstallationInfo info)
         {
             var configPath = Path.Combine(info.SignServiceInfo.ServiceFolder, "appsettings.json");
@@ -38,6 +48,11 @@ namespace EasyESS.SignService
             json.CryptoPro.OperatorPassword = "1Qwerty";
             json.CryptoPro.OperatorPassword = "1Qwerty";
             json.CryptoPro.HealthCheckUrl = "http://ca.foxtrot.comp.npo:8007/health";
+            json.CloudSigningService.OperatorLogin = "Operator";
+            json.CloudSigningService.OperatorPassword = "1Qwerty";
+            json.CloudSigningService.Database = $"ProviderName=System.Data.SqlClient;Data Source={info.DBServerName};Initial Catalog={info.SignServiceInfo.DBName};Integrated Security=false;User ID={info.DBServerUser};Password={info.DBServerPassword};";
+            json.CloudSigningService.DocumentServiceConnectionString = $"Name=Directum.Core.DocumentService;Host={info.DocumentServiceInfo.Host};UseSsl=false;Port={info.DocumentServiceInfo.Port};";
+            json.CloudSigningService.MessageBrokerConnectionString = $"Name=Directum.Core.MessageBroker;Host={info.MessagingServiceInfo.WebApi.Host};Port={info.MessagingServiceInfo.WebApi.Port};UseSsl=false;";
             json.Authentication.TrustedIssuers[0].SigningCertificateThumbprint = info.SigningCertificateThumbprint;
             file = JsonConvert.SerializeObject(json, Formatting.Indented);
             File.WriteAllText(configPath, file);
@@ -47,8 +62,8 @@ namespace EasyESS.SignService
         {
             var executor = new CommandLineExecutor();
             var audiencePath = Path.Combine(info.SignServiceInfo.SourceFolder, "SignServiceAudience.json");
-            File.AppendAllText("C:/idCommands.txt", $"id add user \"SignServiceUser\" - p password = \"11111\"" + Environment.NewLine);
-            File.AppendAllText("C:/idCommands.txt", $"id add user \"SignServiceOperator\" - p password = \"11111\"" + Environment.NewLine);
+            File.AppendAllText("C:/idCommands.txt", $"id add user \"SignServiceUser\" -p password=\"11111\"" + Environment.NewLine);
+            File.AppendAllText("C:/idCommands.txt", $"id add user \"SignServiceOperator\" -p password=\"11111\"" + Environment.NewLine);
             File.AppendAllText("C:/idCommands.txt", $"id assign -u \"SignServiceUser\" -r \"service\"" + Environment.NewLine);
             File.AppendAllText("C:/idCommands.txt", $"id add role \"Admins\"" + Environment.NewLine);
             File.AppendAllText("C:/idCommands.txt", $"id assign -u \"SignServiceOperator\" -r \"Admins\"" + Environment.NewLine);

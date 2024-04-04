@@ -25,6 +25,9 @@ namespace EasyESS
         public StorageServiceInfo StorageServiceInfo { get; set; }
         public DocumentServiceInfo DocumentServiceInfo { get; set; }
         public SignServiceInfo SignServiceInfo { get; set; }
+        public EssServiceInfo EssServiceInfo { get; set; }
+        public EssSiteInfo EssSiteInfo { get; set; }
+        public RabbitMQ RabbitMQ { get; set; }
     }
 
     public sealed class IdentityServiceInfo
@@ -91,8 +94,37 @@ namespace EasyESS
     {
         public string Host { get; set; }
         public string Port { get; set; }
+        public string DBName { get; set; }
         public string SourceFolder { get; set; }
         [JsonIgnore]
         public string ServiceFolder { get; set; }
+    }
+
+    public sealed class EssServiceInfo
+    {
+        public string Host { get; set; }
+        public string Port { get; set; }
+        public string DBName { get; set; }
+        public string SourceFolder { get; set; }
+        [JsonIgnore]
+        public string ServiceFolder { get; set; }
+    }
+
+    public sealed class EssSiteInfo
+    {
+        public string Host { get; set; }
+        public string Port { get; set; }
+        public string SourceFolder { get; set; }
+        [JsonIgnore]
+        public string ServiceFolder { get; set; }
+    }
+
+    public sealed class RabbitMQ
+    {
+        public string Host { get; set; }
+        public string Port { get; set; }
+        public string User { get; set; }
+        public string Password { get; set; }
+        public string VirtualHost { get; set; }
     }
 }
