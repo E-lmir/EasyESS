@@ -77,9 +77,9 @@ namespace EasyESS.SignService
         {
             this.ExtractFiles(info);
             this.FillConfig(info);
-            this.AddToIIS(info);
             this.IdCLIRegistration(info);
             this.CreateDb(info);
+            this.AddToIIS(info);
         }
     }
 }

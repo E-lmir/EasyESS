@@ -50,8 +50,9 @@ namespace EasyESS.IdentityService
         public void Install(InstallationInfo info)
         {
             this.ExtractFiles(info);
-            this.CreateDb(info);
             this.FillConfig(info);
+            this.CreateDb(info);
+            this.CreateDb(info);
             this.AddToIIS(info);
         }
     }
