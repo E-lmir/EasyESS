@@ -33,6 +33,7 @@ namespace EasyESS.EssSite
             json.ConnectionStrings.OfficeService = $"Name=Directum.Core.EssService;Host={info.EssServiceInfo.Host};UseSsl=true;Port={info.EssServiceInfo.Port};User ID=EssServiceUser;Password=11111;";
             json.Authentication.ReturnUrl = $"https://{info.EssSiteInfo.Host}:{info.EssSiteInfo.Port}";
             json.Authentication.SigningCertificateThumbprint = info.SigningCertificateThumbprint;
+            json.ReverseProxy.Routes.StorageService.Transforms = new Transform[] { new Transform { PathRemovePrefix = "/storage", RequestHeaderRemove = "authorization" } };
             file = JsonConvert.SerializeObject(json, Formatting.Indented);
             File.WriteAllText(configPath, file);
         }
