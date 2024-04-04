@@ -96,14 +96,6 @@ namespace EasyESS.EssSite
     {
         public bool EnableConfigLogging { get; set; }
         public string HealthCheckTimeout { get; set; }
-        public Filelogoutput FileLogOutput { get; set; }
-    }
-
-    public class Filelogoutput
-    {
-        public string Format { get; set; }
-        public string Directory { get; set; }
-        public string File { get; set; }
     }
 
     public class Reverseproxy

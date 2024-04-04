@@ -31,7 +31,7 @@ namespace EasyESS.EssSite
             var json = JsonConvert.DeserializeObject<EssSiteConfig>(file);
             json.ConnectionStrings.IdentityService = $"Name=Directum.Core.IdentityService;Host={info.IdentityServiceInfo.Host};UseSsl=true;Port={info.IdentityServiceInfo.Port};User ID=EssServiceUser;Password=11111;";
             json.ConnectionStrings.OfficeService = $"Name=Directum.Core.EssService;Host={info.EssServiceInfo.Host};UseSsl=true;Port={info.EssServiceInfo.Port};User ID=EssServiceUser;Password=11111;";
-            json.Authentication.ReturnUrl = $"https://{info.EssSiteInfo.Host}:{info.EssServiceInfo.Port}";
+            json.Authentication.ReturnUrl = $"https://{info.EssSiteInfo.Host}:{info.EssSiteInfo.Port}";
             json.Authentication.SigningCertificateThumbprint = info.SigningCertificateThumbprint;
             file = JsonConvert.SerializeObject(json, Formatting.Indented);
             File.WriteAllText(configPath, file);
