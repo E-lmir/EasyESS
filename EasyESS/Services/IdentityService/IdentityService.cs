@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using System.IO.Compression;
 
-namespace EasyESS.IdentityService
+namespace EasyESS.Services.IdentityService
 {
     public class IdentityService
     {
@@ -49,11 +49,11 @@ namespace EasyESS.IdentityService
 
         public void Install(InstallationInfo info)
         {
-            this.ExtractFiles(info);
-            this.FillConfig(info);
-            this.CreateDb(info);
-            this.CreateDb(info);
-            this.AddToIIS(info);
+            ExtractFiles(info);
+            FillConfig(info);
+            CreateDb(info);
+            CreateDb(info);
+            AddToIIS(info);
         }
     }
 }

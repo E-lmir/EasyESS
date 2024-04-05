@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EasyESS.MessageBroker.WebApiService
+namespace EasyESS.Services.MessageBroker.WebApiService
 {
 
     public class WebApiConfig

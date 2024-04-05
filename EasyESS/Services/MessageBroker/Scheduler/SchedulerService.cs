@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EasyESS.MessageBroker.Scheduler
+namespace EasyESS.Services.MessageBroker.Scheduler
 {
     public class SchedulerService
     {
@@ -46,9 +46,9 @@ namespace EasyESS.MessageBroker.Scheduler
 
         public void Install(InstallationInfo info)
         {
-            this.ExtractFiles(info);
-            this.AddToIIS(info);
-            this.FillConfig(info);
+            ExtractFiles(info);
+            AddToIIS(info);
+            FillConfig(info);
         }
     }
 }

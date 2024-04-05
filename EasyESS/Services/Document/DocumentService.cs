@@ -1,5 +1,4 @@
 ﻿using CommandExecutor;
-using EasyESS.DocumentService;
 using EasyESS.IdentityService;
 using Newtonsoft.Json;
 using System;
@@ -9,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EasyESS.Document
+namespace EasyESS.Services.Document
 {
     public class DocumentService
     {
@@ -50,10 +49,10 @@ namespace EasyESS.Document
 
         public void Install(InstallationInfo info)
         {
-            this.ExtractFiles(info);
-            this.FillConfig(info);
-            this.AddToIIS(info);
-            this.IdCLIRegistration(info);
+            ExtractFiles(info);
+            FillConfig(info);
+            AddToIIS(info);
+            IdCLIRegistration(info);
         }
     }
 }

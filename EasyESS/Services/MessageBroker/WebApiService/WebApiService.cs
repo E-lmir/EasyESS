@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EasyESS.MessageBroker.WebApiService
+namespace EasyESS.Services.MessageBroker.WebApiService
 {
     public class WebApiService
     {
@@ -54,11 +54,11 @@ namespace EasyESS.MessageBroker.WebApiService
 
         public void Install(InstallationInfo info)
         {
-            this.CreateDb(info);
-            this.ExtractFiles(info);
-            this.AddToIIS(info);
-            this.FillConfig(info);
-            this.IdCLIRegistration(info);
+            CreateDb(info);
+            ExtractFiles(info);
+            AddToIIS(info);
+            FillConfig(info);
+            IdCLIRegistration(info);
         }
     }
 }

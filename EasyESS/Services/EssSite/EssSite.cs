@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EasyESS.EssSite
+namespace EasyESS.Services.EssSite
 {
     public class EssSite
     {
@@ -33,14 +33,14 @@ namespace EasyESS.EssSite
             json.ConnectionStrings.OfficeService = $"Name=Directum.Core.EssService;Host={info.EssServiceInfo.Host};UseSsl=true;Port={info.EssServiceInfo.Port};User ID=EssServiceUser;Password=11111;";
             json.Authentication.ReturnUrl = $"https://{info.EssSiteInfo.Host}:{info.EssSiteInfo.Port}";
             json.Authentication.SigningCertificateThumbprint = info.SigningCertificateThumbprint;
-            json.ReverseProxy.Routes.StorageService.Transforms = new Transform[] { new Transform { PathRemovePrefix = "/storage", RequestHeaderRemove = "authorization" } };
+            json.ReverseProxy.Routes.StorageService.Transforms = /*new Transform[] { new Transform { PathRemovePrefix = "/storage", RequestHeaderRemove = "authorization" } };*/null;
             file = JsonConvert.SerializeObject(json, Formatting.Indented);
             File.WriteAllText(configPath, file);
         }
 
         public void IdCLIRegistration(InstallationInfo info)
         {
-           // var executor = new CommandLineExecutor();
+            // var executor = new CommandLineExecutor();
             var audiencePath = Path.Combine(info.EssServiceInfo.SourceFolder, "EssSiteAudience.json");
             File.AppendAllText("C:/idCommands.txt", $"id add resource \"Directum.Core.EssSite\" -c \"{audiencePath}\" -p returnUrl=\"https://{info.EssSiteInfo.Host}:{info.EssSiteInfo.Port}\" -p originUrl=\"https://{info.EssSiteInfo.Host}:{info.EssSiteInfo.Port}\" -p icon=\"https://{info.EssSiteInfo.Host}:{info.EssSiteInfo.Port}/logo_32.png\"" + Environment.NewLine);
             //TODO Add missing commands
@@ -49,10 +49,10 @@ namespace EasyESS.EssSite
 
         public void Install(InstallationInfo info)
         {
-            this.ExtractFiles(info);
-            this.FillConfig(info);
-            this.IdCLIRegistration(info);
-            this.AddToIIS(info);
+            ExtractFiles(info);
+            FillConfig(info);
+            IdCLIRegistration(info);
+            AddToIIS(info);
         }
     }
 }

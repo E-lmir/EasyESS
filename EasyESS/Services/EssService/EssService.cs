@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EasyESS.EssService
+namespace EasyESS.Services.EssService
 {
     public class EssService
     {
@@ -29,7 +29,7 @@ namespace EasyESS.EssService
             File.AppendAllText("C:/idCommands.txt", $"id assign -u \"EssServiceUser\" -r \"service\"" + Environment.NewLine);
             File.AppendAllText("C:/idCommands.txt", $"id add resource \"Directum.Core.EssService\" -c \"{audiencePath}\" -p icon=\"https://{info.EssSiteInfo.Host}:{info.EssSiteInfo.Port}/logo_32.png\"" + Environment.NewLine);
             //TODO Add missing commands
-           // executor.Execute($"cd {info.IdCLIServiceInfo.ServiceFolder}", $"id add user \"DocServiceUser\" - p password = \"11111\"", $"id assign -u \"SignServiceUser\" -r \"service\"", $"id add resource \"Directum.Core.SignService\" -c \"{audiencePath}\"");
+            // executor.Execute($"cd {info.IdCLIServiceInfo.ServiceFolder}", $"id add user \"DocServiceUser\" - p password = \"11111\"", $"id assign -u \"SignServiceUser\" -r \"service\"", $"id add resource \"Directum.Core.SignService\" -c \"{audiencePath}\"");
         }
 
         public void ExtractFiles(InstallationInfo info)
@@ -66,11 +66,11 @@ namespace EasyESS.EssService
 
         public void Install(InstallationInfo info)
         {
-            this.ExtractFiles(info);
-            this.CreateDb(info);
-            this.IdCLIRegistration(info);
-            this.FillConfig(info);
-            this.AddToIIS(info);
+            ExtractFiles(info);
+            CreateDb(info);
+            IdCLIRegistration(info);
+            FillConfig(info);
+            AddToIIS(info);
         }
     }
 }

@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EasyESS.SignService
+namespace EasyESS.Services.SignService
 {
     public class SignService
     {
@@ -75,11 +75,11 @@ namespace EasyESS.SignService
 
         public void Install(InstallationInfo info)
         {
-            this.ExtractFiles(info);
-            this.FillConfig(info);
-            this.IdCLIRegistration(info);
-            this.CreateDb(info);
-            this.AddToIIS(info);
+            ExtractFiles(info);
+            FillConfig(info);
+            IdCLIRegistration(info);
+            CreateDb(info);
+            AddToIIS(info);
         }
     }
 }

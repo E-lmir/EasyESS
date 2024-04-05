@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EasyESS.EssCLI
+namespace EasyESS.Services.EssCLI
 {
     public class EssCLIService
     {
@@ -29,8 +29,8 @@ namespace EasyESS.EssCLI
 
         public void Install(InstallationInfo info)
         {
-            this.ExtractFiles(info);
-            this.FillConfig(info);
+            ExtractFiles(info);
+            FillConfig(info);
 
         }
     }

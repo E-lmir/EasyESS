@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EasyESS.IdCLI
+namespace EasyESS.Services.IdCLI
 {
     public class IdCLIConfig
     {

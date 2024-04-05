@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EasyESS.SignService
+namespace EasyESS.Services.SignService
 {
     public class SignServiceConfig
     {

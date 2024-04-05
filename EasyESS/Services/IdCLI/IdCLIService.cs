@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EasyESS.IdCLI
+namespace EasyESS.Services.IdCLI
 {
     public class IdCLIService
     {
@@ -37,9 +37,9 @@ namespace EasyESS.IdCLI
 
         public void Install(InstallationInfo info)
         {
-            this.ExtractFiles(info);
-            this.FillConfig(info);
-            this.AddRoles(info);
+            ExtractFiles(info);
+            FillConfig(info);
+            AddRoles(info);
         }
     }
 }

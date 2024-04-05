@@ -1,6 +1,5 @@
 ﻿using CommandExecutor;
 using EasyESS.IdentityService;
-using EasyESS.Storage;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -9,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EasyESS.StorageService
+namespace EasyESS.Services.Storage
 {
     public class StorageService
     {
@@ -48,10 +47,10 @@ namespace EasyESS.StorageService
 
         public void Install(InstallationInfo info)
         {
-            this.ExtractFiles(info);
-            this.AddToIIS(info);
-            this.FillConfig(info);
-            this.IdCLIRegistration(info);
+            ExtractFiles(info);
+            AddToIIS(info);
+            FillConfig(info);
+            IdCLIRegistration(info);
         }
     }
 }
