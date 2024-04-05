@@ -14,6 +14,7 @@ namespace EasyESS
         public string IntegrationServiceEndpoint { get; set; }
         public string IntegrationServiceUser { get; set; }
         public string IntegrationServicePassword { get; set; }
+        public string RxVersion {  get; set; }
         public string EssPlatformVersion { get; set; }
         public string EssBaseTargetSystemsPath {  get; set; }
         public string EssBaseConfigurationPath {  get; set; }

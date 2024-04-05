@@ -29,8 +29,8 @@ namespace EasyESS.Services.EssCLI
             var hrTargetSystemsPath = Path.Combine(info.HRRepositoryPath, "data\\AdapterConfig\\HRSolution_AdapterConfig.json");
             executor.Execute($"{info.EssCLIInfo.ServiceFolder.Substring(0, 2)}",
                 $"cd {info.EssCLIInfo.ServiceFolder}",
-                $"ess connect \"{info.EssBaseTargetSystemsPath}\" -p UserIdentity=\"DirectumRX\" -p Configuration:AppServerConnection:Endpoint=\"{info.IntegrationServiceEndpoint}\" -p Configuration:AppServerConnection:UserName=\"{info.IntegrationServiceUser}\" -p Configuration:AppServerConnection:Password=\"{info.IntegrationServicePassword}\" -p Configuration:ServerVersion=\"4.5\"",
-                $"ess connect \"{hrTargetSystemsPath}\" -p UserIdentity=\"DirectumRX\" -p Configuration:AppServerConnection:Endpoint=\"{info.IntegrationServiceEndpoint}\" -p Configuration:AppServerConnection:UserName=\"{info.IntegrationServiceUser}\" -p Configuration:AppServerConnection:Password=\"{info.IntegrationServicePassword}\" -p Configuration:ServerVersion=\"4.5\"",
+                $"ess connect \"{info.EssBaseTargetSystemsPath}\" -p UserIdentity=\"DirectumRX\" -p Configuration:AppServerConnection:Endpoint=\"{info.IntegrationServiceEndpoint}\" -p Configuration:AppServerConnection:UserName=\"{info.IntegrationServiceUser}\" -p Configuration:AppServerConnection:Password=\"{info.IntegrationServicePassword}\" -p Configuration:ServerVersion=\"{info.RxVersion}\"",
+                $"ess connect \"{hrTargetSystemsPath}\" -p UserIdentity=\"DirectumRX\" -p Configuration:AppServerConnection:Endpoint=\"{info.IntegrationServiceEndpoint}\" -p Configuration:AppServerConnection:UserName=\"{info.IntegrationServiceUser}\" -p Configuration:AppServerConnection:Password=\"{info.IntegrationServicePassword}\" -p Configuration:ServerVersion=\"{info.RxVersion}\"",
                 $"ess install {info.EssBaseConfigurationPath} -a",
                 $"ess install {Path.Combine(info.ESSRepositoryPath, "data\\EssConfig\\Roles.xml")} -a",
                 $"ess install {Path.Combine(info.ESSRepositoryPath, "data\\EssConfig\\SignPlatform.xml")} -a",
