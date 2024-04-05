@@ -41,7 +41,7 @@ namespace EasyESS.Services.Document
             var file = File.ReadAllText(configPath);
             var json = JsonConvert.DeserializeObject<DocumentConfig>(file);
             json.ConnectionStrings.IdentityService = $"Name=Directum.Core.IdentityService;Host={info.IdentityServiceInfo.Host};UseSsl=true;Port={info.IdentityServiceInfo.Port};User ID=DocServiceUser;Password=11111;";
-            json.ConnectionStrings.StorageService = $"Name=Storage service;Host={info.StorageServiceInfo.Host};UseSsl=false;Port={info.StorageServiceInfo.Port};";
+            json.ConnectionStrings.StorageService = $"Name=Directum.Core.BlobStorageService;Host={info.StorageServiceInfo.Host};UseSsl=false;Port={info.StorageServiceInfo.Port};";
             json.Authentication.SigningCertificateThumbprint = info.SigningCertificateThumbprint;
             file = JsonConvert.SerializeObject(json, Formatting.Indented);
             File.WriteAllText(configPath, file);

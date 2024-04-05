@@ -45,7 +45,7 @@ namespace EasyESS.Services.EssService
             var file = File.ReadAllText(configPath);
             var json = JsonConvert.DeserializeObject<EssServiceConfig>(file);
             json.ConnectionStrings.IdentityService = $"Name=Directum.Core.IdentityService;Host={info.IdentityServiceInfo.Host};UseSsl=true;Port={info.IdentityServiceInfo.Port};User ID=EssServiceUser;Password=11111;";
-            json.ConnectionStrings.StorageService = $"Name=Storage service;Host={info.StorageServiceInfo.Host};UseSsl=false;Port={info.StorageServiceInfo.Port};";
+            json.ConnectionStrings.StorageService = $"Name=Directum.Core.BlobStorageService;Host={info.StorageServiceInfo.Host};UseSsl=false;Port={info.StorageServiceInfo.Port};";
             json.ConnectionStrings.Database = $"ProviderName=System.Data.SqlClient;Data Source={info.DBServerName};Initial Catalog={info.EssServiceInfo.DBName};Integrated Security=False;User ID={info.DBServerUser};Password={info.DBServerPassword};";
             json.ConnectionStrings.RabbitMQ = $"userName={info.RabbitMQ.User};password={info.RabbitMQ.Password};hostName={info.RabbitMQ.Host};port={info.RabbitMQ.Port};virtualHost={info.RabbitMQ.VirtualHost};";
             json.ConnectionStrings.SignService = $"Name=Directum.Core.SignService;Host={info.SignServiceInfo.Host};UseSsl=true;Port={info.SignServiceInfo.Port};";
