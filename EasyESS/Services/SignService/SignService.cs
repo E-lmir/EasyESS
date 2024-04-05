@@ -62,15 +62,15 @@ namespace EasyESS.Services.SignService
         {
             var executor = new CommandLineExecutor();
             var audiencePath = Path.Combine(info.SignServiceInfo.SourceFolder, "SignServiceAudience.json");
-            File.AppendAllText("C:/idCommands.txt", $"id add user \"SignServiceUser\" -p password=\"11111\"" + Environment.NewLine);
-            File.AppendAllText("C:/idCommands.txt", $"id add user \"SignServiceOperator\" -p password=\"11111\"" + Environment.NewLine);
-            File.AppendAllText("C:/idCommands.txt", $"id assign -u \"SignServiceUser\" -r \"service\"" + Environment.NewLine);
-            File.AppendAllText("C:/idCommands.txt", $"id add role \"Admins\"" + Environment.NewLine);
-            File.AppendAllText("C:/idCommands.txt", $"id assign -u \"SignServiceOperator\" -r \"Admins\"" + Environment.NewLine);
-            File.AppendAllText("C:/idCommands.txt", $"id add role \"Users\"" + Environment.NewLine);
-            File.AppendAllText("C:/idCommands.txt", $"id add resource \"Directum.Core.SignService\" -c \"{audiencePath}\"" + Environment.NewLine);
-            //TODO Add missing commands
-            executor.Execute($"cd {info.IdCLIServiceInfo.ServiceFolder}", $"id add user \"DocServiceUser\" - p password = \"11111\"", $"id assign -u \"SignServiceUser\" -r \"service\"", $"id add resource \"Directum.Core.SignService\" -c \"{audiencePath}\"");
+            executor.Execute($"{info.IdCLIServiceInfo.ServiceFolder.Substring(0, 2)}", 
+                $"cd {info.IdCLIServiceInfo.ServiceFolder}",
+                $"id add user \"SignServiceUser\" -p password=\"11111\"",
+                $"id add user \"SignServiceOperator\" -p password=\"11111\"",
+                $"id add role \"Admins\"",
+                $"id add role \"Users\"",
+                $"id assign -u \"SignServiceUser\" -r \"service\"",
+                $"id assign -u \"SignServiceOperator\" -r \"Admins\"",
+                $"id add resource \"Directum.Core.SignService\" -c \"{audiencePath}\"");
         }
 
         public void Install(InstallationInfo info)

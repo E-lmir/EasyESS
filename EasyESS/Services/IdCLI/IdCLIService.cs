@@ -31,8 +31,9 @@ namespace EasyESS.Services.IdCLI
         public void AddRoles(InstallationInfo info)
         {
             var executor = new CommandLineExecutor();
-            File.AppendAllText("C:/idCommands.txt", $"id add role \"service\"" + Environment.NewLine);
-            executor.Execute($"cd {info.IdCLIServiceInfo.ServiceFolder}", $"id add role \"service\"");
+            executor.Execute($"{info.IdCLIServiceInfo.ServiceFolder.Substring(0, 2)}", 
+                $"cd {info.IdCLIServiceInfo.ServiceFolder}", 
+                $"id add role \"service\"");
         }
 
         public void Install(InstallationInfo info)

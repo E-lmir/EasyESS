@@ -41,8 +41,10 @@ namespace EasyESS.Services.Storage
         public void IdCLIRegistration(InstallationInfo info)
         {
             var executor = new CommandLineExecutor();
-            File.AppendAllText("C:/idCommands.txt", $"id add resource \"Directum.Core.BlobStorageService\" -c \"{info.StorageServiceInfo.SourceFolder}\\BlobStorageServiceAudience.json\"" + Environment.NewLine);
-            executor.Execute($"cd {info.IdCLIServiceInfo.ServiceFolder}", $"id add resource \"Directum.Core.BlobStorageService\" -c \"{info.StorageServiceInfo.SourceFolder}\\BlobStorageServiceAudience.json\"");
+            var audiencePath = Path.Combine(info.StorageServiceInfo.SourceFolder, "BlobStorageServiceAudience.json");
+            executor.Execute($"{info.IdCLIServiceInfo.ServiceFolder.Substring(0, 2)}", 
+                $"cd {info.IdCLIServiceInfo.ServiceFolder}",
+                $"id add resource \"Directum.Core.BlobStorageService\" -c \"{audiencePath}\"");
         }
 
         public void Install(InstallationInfo info)
