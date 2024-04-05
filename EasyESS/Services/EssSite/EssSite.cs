@@ -42,8 +42,6 @@ namespace EasyESS.Services.EssSite
         {
             var executor = new CommandLineExecutor();
             var audiencePath = Path.Combine(info.EssServiceInfo.SourceFolder, "EssSiteAudience.json");
-            File.AppendAllText("C:/idCommands.txt", $"id add resource \"Directum.Core.EssSite\" -c \"{audiencePath}\" -p returnUrl=\"https://{info.EssSiteInfo.Host}:{info.EssSiteInfo.Port}\" -p originUrl=\"https://{info.EssSiteInfo.Host}:{info.EssSiteInfo.Port}\" -p icon=\"https://{info.EssSiteInfo.Host}:{info.EssSiteInfo.Port}/logo_32.png\"" + Environment.NewLine);
-            //TODO Add missing commands
             executor.Execute($"{info.IdCLIServiceInfo.ServiceFolder.Substring(0, 2)}", 
                 $"cd {info.IdCLIServiceInfo.ServiceFolder}",
                 $"id add resource \"Directum.Core.EssSite\" -c \"{audiencePath}\" -p returnUrl=\"https://{info.EssSiteInfo.Host}:{info.EssSiteInfo.Port}\" -p originUrl=\"https://{info.EssSiteInfo.Host}:{info.EssSiteInfo.Port}\" -p icon=\"https://{info.EssSiteInfo.Host}:{info.EssSiteInfo.Port}/logo_32.png\"");
