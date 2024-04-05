@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EasyESS.Services.Document
+﻿namespace EasyESS.Services.Document
 {
 
     public class DocumentConfig
