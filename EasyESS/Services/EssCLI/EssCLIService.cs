@@ -1,10 +1,11 @@
-﻿using EasyESS.Contracts;
+﻿using CommandExecutor;
+using EasyESS.Contracts;
 using Newtonsoft.Json;
 using System.IO.Compression;
 
 namespace EasyESS.Services.EssCLI
 {
-    public class EssCLIService : IService
+    public class EssCLIService : IService, IRegistrable
     {
         public void ExtractFiles(InstallationInfo info)
         {
@@ -22,11 +23,28 @@ namespace EasyESS.Services.EssCLI
             File.WriteAllText(configPath, file);
         }
 
+        public void Register(InstallationInfo info)
+        {
+            var executor = new CommandLineExecutor();
+            var hrTargetSystemsPath = Path.Combine(info.HRRepositoryPath, "data\\AdapterConfig\\HRSolution_AdapterConfig.json");
+            executor.Execute($"{info.EssCLIInfo.ServiceFolder.Substring(0, 2)}",
+                $"cd {info.EssCLIInfo.ServiceFolder}",
+                $"ess connect \"{info.EssBaseTargetSystemsPath}\" -p UserIdentity=\"DirectumRX\" -p Configuration:AppServerConnection:Endpoint=\"{info.IntegrationServiceEndpoint}\" -p Configuration:AppServerConnection:UserName=\"{info.IntegrationServiceUser}\" -p Configuration:AppServerConnection:Password=\"{info.IntegrationServicePassword}\" -p Configuration:ServerVersion=\"4.5\"",
+                $"ess connect \"{hrTargetSystemsPath}\" -p UserIdentity=\"DirectumRX\" -p Configuration:AppServerConnection:Endpoint=\"{info.IntegrationServiceEndpoint}\" -p Configuration:AppServerConnection:UserName=\"{info.IntegrationServiceUser}\" -p Configuration:AppServerConnection:Password=\"{info.IntegrationServicePassword}\" -p Configuration:ServerVersion=\"4.5\"",
+                $"ess install {info.EssBaseConfigurationPath} -a",
+                $"ess install {Path.Combine(info.ESSRepositoryPath, "data\\EssConfig\\Roles.xml")} -a",
+                $"ess install {Path.Combine(info.ESSRepositoryPath, "data\\EssConfig\\SignPlatform.xml")} -a",
+                $"ess install {Path.Combine(info.ESSRepositoryPath, "data\\EssConfig\\UsageAgreements.xml")} -a",
+                $"ess install {Path.Combine(info.HRRepositoryPath, "data\\EssConfig\\Statements.xml")} -a",
+                $"ess install {Path.Combine(info.HRRepositoryPath, "data\\EssConfig\\StatementTilesExtension.xml")} -a",
+                $"ess install {Path.Combine(info.HRRepositoryPath, "data\\EssConfig\\Vacations.xml")} -a");
+        }
+
         public void Install(InstallationInfo info)
         {
             ExtractFiles(info);
             FillConfig(info);
-
+            Register(info);
         }
     }
 }

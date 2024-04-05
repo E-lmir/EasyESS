@@ -15,6 +15,10 @@ namespace EasyESS
         public string IntegrationServiceUser { get; set; }
         public string IntegrationServicePassword { get; set; }
         public string EssPlatformVersion { get; set; }
+        public string EssBaseTargetSystemsPath {  get; set; }
+        public string EssBaseConfigurationPath {  get; set; }
+        public string HRRepositoryPath { get; set; }
+        public string ESSRepositoryPath { get; set; }
         public IdentityServiceInfo IdentityServiceInfo { get; set; }
         public MessagingServiceInfo MessagingServiceInfo { get; set; }
         public IdCLIServiceInfo IdCLIServiceInfo { get; set; }
