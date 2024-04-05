@@ -5,6 +5,7 @@ namespace EasyESS
     public sealed class InstallationInfo
     {
         public string InstanceFolder { get; set; }
+        public string InstanceTag { get; set; }
         public string SQLCmdPath { get; set; }
         public string DBServerName { get; set; }
         public string DBServerUser { get; set; }

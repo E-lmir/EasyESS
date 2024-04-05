@@ -17,7 +17,10 @@ namespace EasyESS.Services.Document
         public void AddToIIS(InstallationInfo info)
         {
             var executor = new CommandLineExecutor();
-            executor.Execute($"cd c:\\Windows\\System32\\inetsrv", "appcmd add apppool /name:Document19 /managedRuntimeVersion: /managedPipelineMode:Integrated", $"appcmd add site /name:Document19 /physicalPath:{info.DocumentServiceInfo.ServiceFolder} /bindings:http/*:{info.DocumentServiceInfo.Port}:", "APPCMD.exe set app \"Document19/\" /applicationPool:\"Document19\"");
+            executor.Execute($"cd c:\\Windows\\System32\\inetsrv", 
+                $"appcmd add apppool /name:Document{info.InstanceTag} /managedRuntimeVersion: /managedPipelineMode:Integrated", 
+                $"appcmd add site /name:Document{info.InstanceTag} /physicalPath:{info.DocumentServiceInfo.ServiceFolder} /bindings:http/*:{info.DocumentServiceInfo.Port}:", 
+                $"APPCMD.exe set app \"Document{info.InstanceTag}/\" /applicationPool:\"Document{info.InstanceTag}\"");
         }
 
         public void Register(InstallationInfo info)

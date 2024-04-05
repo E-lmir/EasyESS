@@ -17,7 +17,10 @@ namespace EasyESS.Services.EssSite
         public void AddToIIS(InstallationInfo info)
         {
             var executor = new CommandLineExecutor();
-            executor.Execute($"cd c:\\Windows\\System32\\inetsrv", "appcmd add apppool /name:EssSite19 /managedRuntimeVersion: /managedPipelineMode:Integrated", $"appcmd add site /name:EssSite19 /physicalPath:{info.EssSiteInfo.ServiceFolder} /bindings:https/*:{info.EssSiteInfo.Port}:", "APPCMD.exe set app \"EssSite19/\" /applicationPool:\"EssSite19\"");
+            executor.Execute($"cd c:\\Windows\\System32\\inetsrv", 
+                $"appcmd add apppool /name:EssSite{info.InstanceTag} /managedRuntimeVersion: /managedPipelineMode:Integrated", 
+                $"appcmd add site /name:EssSite{info.InstanceTag} /physicalPath:{info.EssSiteInfo.ServiceFolder} /bindings:https/*:{info.EssSiteInfo.Port}:",
+                $"APPCMD.exe set app \"EssSite{info.InstanceTag}/\" /applicationPool:\"EssSite{info.InstanceTag}\"");
         }
 
         public void FillConfig(InstallationInfo info)

@@ -17,7 +17,10 @@ namespace EasyESS.Services.Storage
         public void AddToIIS(InstallationInfo info)
         {
             var executor = new CommandLineExecutor();
-            executor.Execute($"cd c:\\Windows\\System32\\inetsrv", "appcmd add apppool /name:Storage19 /managedRuntimeVersion: /managedPipelineMode:Integrated", $"appcmd add site /name:Storage19 /physicalPath:{info.StorageServiceInfo.ServiceFolder} /bindings:http/*:{info.StorageServiceInfo.Port}:", "APPCMD.exe set app \"Storage19/\" /applicationPool:\"Storage19\"");
+            executor.Execute($"cd c:\\Windows\\System32\\inetsrv", 
+                $"appcmd add apppool /name:Storage{info.InstanceTag} /managedRuntimeVersion: /managedPipelineMode:Integrated", 
+                $"appcmd add site /name:Storage{info.InstanceTag} /physicalPath:{info.StorageServiceInfo.ServiceFolder} /bindings:http/*:{info.StorageServiceInfo.Port}:", 
+                $"APPCMD.exe set app \"Storage{info.InstanceTag}/\" /applicationPool:\"Storage{info.InstanceTag}\"");
         }
 
         public void FillConfig(InstallationInfo info)
