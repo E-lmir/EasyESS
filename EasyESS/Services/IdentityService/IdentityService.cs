@@ -1,10 +1,11 @@
 ﻿using CommandExecutor;
+using EasyESS.Contracts;
 using Newtonsoft.Json;
 using System.IO.Compression;
 
 namespace EasyESS.Services.IdentityService
 {
-    public class IdentityService
+    public class IdentityService : IService, IDataAccessable, IHostable
     {
         public void ExtractFiles(InstallationInfo info)
         {

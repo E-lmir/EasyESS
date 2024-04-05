@@ -1,4 +1,5 @@
 ﻿using CommandExecutor;
+using EasyESS.Contracts;
 using EasyESS.IdentityService;
 using Newtonsoft.Json;
 using System;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace EasyESS.Services.IdCLI
 {
-    public class IdCLIService
+    public class IdCLIService : IService, IRegistrable
     {
         public void ExtractFiles(InstallationInfo info)
         {
@@ -28,7 +29,7 @@ namespace EasyESS.Services.IdCLI
             File.WriteAllText(configPath, file);
         }
 
-        public void AddRoles(InstallationInfo info)
+        public void Register(InstallationInfo info)
         {
             var executor = new CommandLineExecutor();
             executor.Execute($"{info.IdCLIServiceInfo.ServiceFolder.Substring(0, 2)}", 
@@ -40,7 +41,7 @@ namespace EasyESS.Services.IdCLI
         {
             ExtractFiles(info);
             FillConfig(info);
-            AddRoles(info);
+            Register(info);
         }
     }
 }

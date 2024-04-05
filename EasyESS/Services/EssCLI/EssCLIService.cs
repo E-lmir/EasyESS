@@ -1,4 +1,4 @@
-﻿using EasyESS.IdCLI;
+﻿using EasyESS.Contracts;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace EasyESS.Services.EssCLI
 {
-    public class EssCLIService
+    public class EssCLIService : IService
     {
         public void ExtractFiles(InstallationInfo info)
         {

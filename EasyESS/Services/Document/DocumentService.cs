@@ -1,16 +1,13 @@
 ﻿using CommandExecutor;
-using EasyESS.IdentityService;
+using EasyESS.Contracts;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO.Compression;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EasyESS.Services.Document
 {
-    public class DocumentService
+    public class DocumentService : IService, IRegistrable, IHostable
     {
         public void ExtractFiles(InstallationInfo info)
         {
@@ -25,7 +22,7 @@ namespace EasyESS.Services.Document
             executor.Execute($"cd c:\\Windows\\System32\\inetsrv", "appcmd add apppool /name:Document19 /managedRuntimeVersion: /managedPipelineMode:Integrated", $"appcmd add site /name:Document19 /physicalPath:{info.DocumentServiceInfo.ServiceFolder} /bindings:http/*:{info.DocumentServiceInfo.Port}:", "APPCMD.exe set app \"Document19/\" /applicationPool:\"Document19\"");
         }
 
-        public void IdCLIRegistration(InstallationInfo info)
+        public void Register(InstallationInfo info)
         {
             var executor = new CommandLineExecutor();
             var audiencePath = Path.Combine(info.DocumentServiceInfo.SourceFolder, "DocumentServiceAudience.json");
@@ -53,7 +50,7 @@ namespace EasyESS.Services.Document
             ExtractFiles(info);
             FillConfig(info);
             AddToIIS(info);
-            IdCLIRegistration(info);
+            Register(info);
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using CommandExecutor;
-using EasyESS.DocumentService;
+using EasyESS.Contracts;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace EasyESS.Services.EssService
 {
-    public class EssService
+    public class EssService : IService, IDataAccessable, IRegistrable, IHostable
     {
         public void CreateDb(InstallationInfo info)
         {
@@ -21,7 +21,7 @@ namespace EasyESS.Services.EssService
             executor.Execute(@$"cd {info.SQLCmdPath}", $"sqlcmd -U {info.DBServerUser} -P {info.DBServerPassword} -S {info.DBServerName} -d {info.EssServiceInfo.DBName} -i {dbScriptPath}");
         }
 
-        public void IdCLIRegistration(InstallationInfo info)
+        public void Register(InstallationInfo info)
         {
             var executor = new CommandLineExecutor();
             var audiencePath = Path.Combine(info.EssServiceInfo.SourceFolder, "EssServiceAudience.json");
@@ -68,7 +68,7 @@ namespace EasyESS.Services.EssService
         {
             ExtractFiles(info);
             CreateDb(info);
-            IdCLIRegistration(info);
+            Register(info);
             FillConfig(info);
             AddToIIS(info);
         }

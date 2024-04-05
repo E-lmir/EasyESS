@@ -1,4 +1,5 @@
 ﻿using CommandExecutor;
+using EasyESS.Contracts;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace EasyESS.Services.Storage
 {
-    public class StorageService
+    public class StorageService : IService, IRegistrable, IHostable
     {
         public void ExtractFiles(InstallationInfo info)
         {
@@ -37,7 +38,7 @@ namespace EasyESS.Services.Storage
             File.WriteAllText(configPath, file);
         }
 
-        public void IdCLIRegistration(InstallationInfo info)
+        public void Register(InstallationInfo info)
         {
             var executor = new CommandLineExecutor();
             var audiencePath = Path.Combine(info.StorageServiceInfo.SourceFolder, "BlobStorageServiceAudience.json");
@@ -51,7 +52,7 @@ namespace EasyESS.Services.Storage
             ExtractFiles(info);
             AddToIIS(info);
             FillConfig(info);
-            IdCLIRegistration(info);
+            Register(info);
         }
     }
 }

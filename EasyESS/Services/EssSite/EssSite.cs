@@ -1,5 +1,5 @@
 ﻿using CommandExecutor;
-using EasyESS.EssService;
+using EasyESS.Contracts;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace EasyESS.Services.EssSite
 {
-    public class EssSite
+    public class EssSite : IService, IRegistrable, IHostable
     {
         public void ExtractFiles(InstallationInfo info)
         {
@@ -38,7 +38,7 @@ namespace EasyESS.Services.EssSite
             File.WriteAllText(configPath, file);
         }
 
-        public void IdCLIRegistration(InstallationInfo info)
+        public void Register(InstallationInfo info)
         {
             var executor = new CommandLineExecutor();
             var audiencePath = Path.Combine(info.EssServiceInfo.SourceFolder, "EssSiteAudience.json");
@@ -53,7 +53,7 @@ namespace EasyESS.Services.EssSite
         {
             ExtractFiles(info);
             FillConfig(info);
-            IdCLIRegistration(info);
+            Register(info);
             AddToIIS(info);
         }
     }

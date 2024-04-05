@@ -1,5 +1,5 @@
 ﻿using CommandExecutor;
-using EasyESS.DocumentService;
+using EasyESS.Contracts;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace EasyESS.Services.SignService
 {
-    public class SignService
+    public class SignService : IService, IDataAccessable, IRegistrable, IHostable
     {
         public void ExtractFiles(InstallationInfo info)
         {
@@ -58,7 +58,7 @@ namespace EasyESS.Services.SignService
             File.WriteAllText(configPath, file);
         }
 
-        public void IdCLIRegistration(InstallationInfo info)
+        public void Register(InstallationInfo info)
         {
             var executor = new CommandLineExecutor();
             var audiencePath = Path.Combine(info.SignServiceInfo.SourceFolder, "SignServiceAudience.json");
@@ -77,7 +77,7 @@ namespace EasyESS.Services.SignService
         {
             ExtractFiles(info);
             FillConfig(info);
-            IdCLIRegistration(info);
+            Register(info);
             CreateDb(info);
             AddToIIS(info);
         }
