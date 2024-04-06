@@ -95,6 +95,7 @@ namespace EasyESS.Services.EssSite
             FillConfig(info);
             Register(info);
             AddToIIS(info);
+            FillWebConfig(info);
         }
     }
 }
