@@ -48,8 +48,10 @@ namespace EasyESS.Services.MessageBroker.WebApiService
         public void IdCLIRegistration(InstallationInfo info)
         {
             var executor = new CommandLineExecutor();
-            File.AppendAllText("C:/idCommands.txt", $"id add resource \"Directum.Core.MessageBroker\" -c \"{info.MessagingServiceInfo.SourceFolder}\\MessageBrokerAudience.json\"" + Environment.NewLine);
-            executor.Execute($"cd {info.IdCLIServiceInfo.ServiceFolder}", $"id add resource \"Directum.Core.MessageBroker\" -c \"{info.MessagingServiceInfo.SourceFolder}\\MessageBrokerAudience.json\"");
+            var audiencePath = Path.Combine(info.MessagingServiceInfo.SourceFolder, "MessageBrokerAudience.json");
+            executor.Execute($"{info.IdCLIServiceInfo.ServiceFolder.Substring(0, 2)}", 
+                $"cd {info.IdCLIServiceInfo.ServiceFolder}", 
+                $"id add resource \"Directum.Core.MessageBroker\" -c \"{audiencePath}\"");
         }
 
         public void Install(InstallationInfo info)
