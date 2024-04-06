@@ -51,7 +51,6 @@ namespace EasyESS.Services.EssSite
         public void FillWebConfig(InstallationInfo info)
         {
             var configPath = Path.Combine(info.EssSiteInfo.ServiceFolder, "web.config");
-            var file = File.ReadAllText(configPath);
             var xml = new XmlSerializer(typeof(EssSiteWebConfig));
             using var fs = new FileStream(configPath, FileMode.OpenOrCreate);
             var config = xml.Deserialize(fs) as EssSiteWebConfig;
@@ -85,7 +84,9 @@ namespace EasyESS.Services.EssSite
                 };
             }
 
-            xml.Serialize(fs, config);
+            File.Delete(configPath);
+            using var fileStream = new FileStream(configPath, FileMode.OpenOrCreate);
+            xml.Serialize(fileStream, config);
         }
 
         public void Install(InstallationInfo info)
