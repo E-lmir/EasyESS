@@ -52,9 +52,10 @@ namespace EasyESS.Services.EssSite
         {
             var configPath = Path.Combine(info.EssSiteInfo.ServiceFolder, "web.config");
             var xml = new XmlSerializer(typeof(EssSiteWebConfig));
+            EssSiteWebConfig config = null;
             using (var fs = new FileStream(configPath, FileMode.OpenOrCreate))
             {
-                var config = xml.Deserialize(fs) as EssSiteWebConfig;
+                config = xml.Deserialize(fs) as EssSiteWebConfig;
                 if (config != null)
                 {
                     config.systemwebServer = new configurationSystemwebServer();
@@ -83,10 +84,15 @@ namespace EasyESS.Services.EssSite
                         },
                         match = new configurationSystemwebServerRewriteRuleMatch { url = "^api/(.*)" }
                     };
-
-                    xml.Serialize(fs, config);
+                    
                 }
-            }         
+            }
+
+            File.Delete(configPath);
+            using (var fs = new FileStream(configPath, FileMode.OpenOrCreate))
+            {
+                xml.Serialize(fs, config);
+            }
         }
 
         public void Install(InstallationInfo info)
