@@ -31,7 +31,10 @@ namespace EasyESS.Services.MessageBroker.WebApiService
         public void AddToIIS(InstallationInfo info)
         {
             var executor = new CommandLineExecutor();
-            executor.Execute($"cd c:\\Windows\\System32\\inetsrv", "appcmd add apppool /name:CoreMessageBroker19 /managedRuntimeVersion: /managedPipelineMode:Integrated", $"appcmd add site /name:CoreMessageBroker19 /physicalPath:{info.MessagingServiceInfo.WebApi.ServiceFolder} /bindings:http/*:{info.MessagingServiceInfo.WebApi.Port}:", "APPCMD.exe set app \"CoreMessageBroker19/\" /applicationPool:\"CoreMessageBroker19\"");
+            executor.Execute($"cd c:\\Windows\\System32\\inetsrv", 
+                $"appcmd add apppool /name:CoreMessageBroker{info.InstanceTag} /managedRuntimeVersion: /managedPipelineMode:Integrated", 
+                $"appcmd add site /name:CoreMessageBroker{info.InstanceTag} /physicalPath:{info.MessagingServiceInfo.WebApi.ServiceFolder} /bindings:http/*:{info.MessagingServiceInfo.WebApi.Port}:",
+                $"APPCMD.exe set app \"CoreMessageBroker{info.InstanceTag}/\" /applicationPool:\"CoreMessageBroker{info.InstanceTag}\"");
         }
         public void FillConfig(InstallationInfo info)
         {
