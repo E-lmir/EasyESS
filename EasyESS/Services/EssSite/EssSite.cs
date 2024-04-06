@@ -2,6 +2,8 @@
 using EasyESS.Contracts;
 using Newtonsoft.Json;
 using System.IO.Compression;
+using System.Xml;
+using System.Xml.Serialization;
 
 
 namespace EasyESS.Services.EssSite
@@ -33,7 +35,7 @@ namespace EasyESS.Services.EssSite
             json.Authentication.ReturnUrl = $"https://{info.EssSiteInfo.Host}:{info.EssSiteInfo.Port}";
             json.Authentication.SigningCertificateThumbprint = info.SigningCertificateThumbprint;
             json.ReverseProxy.Routes.StorageService.Transforms = null;
-            file = JsonConvert.SerializeObject(json, Formatting.Indented);
+            file = JsonConvert.SerializeObject(json, Newtonsoft.Json.Formatting.Indented);
             File.WriteAllText(configPath, file);
         }
 
@@ -44,6 +46,46 @@ namespace EasyESS.Services.EssSite
             executor.Execute($"{info.IdCLIServiceInfo.ServiceFolder.Substring(0, 2)}", 
                 $"cd {info.IdCLIServiceInfo.ServiceFolder}",
                 $"id add resource \"Directum.Core.EssSite\" -c \"{audiencePath}\" -p returnUrl=\"https://{info.EssSiteInfo.Host}:{info.EssSiteInfo.Port}\" -p originUrl=\"https://{info.EssSiteInfo.Host}:{info.EssSiteInfo.Port}\" -p icon=\"https://{info.EssSiteInfo.Host}:{info.EssSiteInfo.Port}/logo_32.png\"");
+        }
+
+        public void FillWebConfig(InstallationInfo info)
+        {
+            var configPath = Path.Combine(info.EssSiteInfo.ServiceFolder, "web.config");
+            var file = File.ReadAllText(configPath);
+            var xml = new XmlSerializer(typeof(EssSiteWebConfig));
+            using var fs = new FileStream(configPath, FileMode.OpenOrCreate);
+            var config = xml.Deserialize(fs) as EssSiteWebConfig;
+            if (config != null)
+            {
+                config.systemwebServer = new configurationSystemwebServer();
+                config.systemwebServer.rewrite = new configurationSystemwebServerRewrite();
+                config.systemwebServer.rewrite.rules = new configurationSystemwebServerRewriteRule[2];
+                config.systemwebServer.rewrite.rules[0] = new configurationSystemwebServerRewriteRule
+                {
+                    name = "storage",
+                    stopProcessing = true,
+                    action = new configurationSystemwebServerRewriteRuleAction
+                    {
+                        type = "Rewrite",
+                        url = $"http://{info.StorageServiceInfo.Host}:{info.StorageServiceInfo.Port}/{{R:1}}"
+                    },
+                    match = new configurationSystemwebServerRewriteRuleMatch { url = "^storage/(.*)" }
+                };
+
+                config.systemwebServer.rewrite.rules[1] = new configurationSystemwebServerRewriteRule
+                {
+                    name = "api",
+                    stopProcessing = true,
+                    action = new configurationSystemwebServerRewriteRuleAction
+                    {
+                        type = "Rewrite",
+                        url = $"https://{info.EssServiceInfo.Host}:{info.EssServiceInfo.Port}/api/{{R:1}}"
+                    },
+                    match = new configurationSystemwebServerRewriteRuleMatch { url = "^api/(.*)" }
+                };
+            }
+
+            xml.Serialize(fs, config);
         }
 
         public void Install(InstallationInfo info)
