@@ -43,7 +43,7 @@ namespace EasyESS.Services.MessageBroker.Scheduler
             json.Transport.Proxies = new Proxy[] { json.Transport.Proxies[0] };
             json.Transport.Proxies[0].Configuration.Username = "DIDSMS";
             json.Transport.Proxies[0].Configuration.Password = "7863400";
-            json.Transport.Proxies[0].Configuration.Password = "DIDSMS";
+            json.Transport.Proxies[0].Configuration.Sender = "DIDSMS";
             file = JsonConvert.SerializeObject(json, Formatting.Indented);
             File.WriteAllText(configPath, file);
         }
