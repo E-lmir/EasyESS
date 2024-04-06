@@ -30,7 +30,7 @@ namespace EasyESS.Services.Storage
             var json = JsonConvert.DeserializeObject<StorageConfig>(file);
             var path = Path.Combine(info.StorageServiceInfo.ServiceFolder, info.StorageServiceInfo.FileStoragePath);
             Directory.CreateDirectory(path);
-            json.General.FileStoragePath = path;
+            json.General.FileStoragePath = $"./{info.StorageServiceInfo.FileStoragePath}";
             json.Authentication.SigningCertificateThumbprint = info.SigningCertificateThumbprint;
             file = JsonConvert.SerializeObject(json, Formatting.Indented);
             File.WriteAllText(configPath, file);
