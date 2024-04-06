@@ -1,0 +1,77 @@
+{
+  "InstanceFolder": "D:/ESS190",
+  "InstanceTag": "190",
+  "SQLCmdPath": "C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\170\\Tools\\Binn",
+  "DBServerName": "W1301W10\\MSSQLSERVER02",
+  "DBServerUser": "sadmin",
+  "DBServerPassword": "11111",
+  "SigningCertificateThumbprint": "76d8a7618d669881b29a11a9c5361bdb84c00fba",
+  "IntegrationServiceEndpoint": "https://localhost:45443/integration/odata",
+  "IntegrationServiceUser": "Service User",
+  "IntegrationServicePassword": "11111",
+  "RxVersion": "4.5",
+  "EssPlatformVersion": "1.9",
+  "EssBaseTargetSystemsPath": "\\\\irnpo\\public\\Ess\\Platform\\1.9\\1.9.27\\Solutions\\Ess\\TargetSystems\\EssBaseEndpoint.json",
+  "EssBaseConfigurationPath": "\\\\irnpo\\public\\Ess\\Platform\\1.9\\1.9.27\\Solutions\\Ess\\EssBase.xml",
+  "HRRepositoryPath": "D:\\RX45\\rx\\4532\\s\\HRPro_v19",
+  "ESSRepositoryPath": "D:\\RX45\\rx\\4532\\s\\EssPlatform_nocode_19",
+  "IdentityServiceInfo": {
+    "SourceFolder": "D:\\1.9.27\\Components\\IdentityService",
+    "DBName": "Identity190",
+    "Host": "localhost",
+    "Port": "666"
+  },
+  "MessagingServiceInfo": {
+    "SourceFolder": "\\\\irnpo\\public\\Ess\\Platform\\1.9\\1.9.25\\Components\\MessageBroker",
+    "DBName": "Messages190",
+    "Scheduler": {
+      "Host": "localhost",
+      "Port": "667"
+    },
+    "WebApi": {
+      "Host": "localhost",
+      "Port": "668"
+    }
+  },
+  "IdCLIServiceInfo": {
+    "SourceFolder": "\\\\irnpo\\public\\Ess\\Platform\\1.9\\1.9.27\\Tools"
+  },
+  "StorageServiceInfo": {
+    "Host": "localhost",
+    "SourceFolder": "\\\\irnpo\\public\\Ess\\Platform\\1.9\\1.9.27\\Components\\StorageService",
+    "Port": "669",
+    "FileStoragePath": "storage"
+  },
+  "DocumentServiceInfo": {
+    "Host": "localhost",
+    "Port": "670",
+    "SourceFolder": "\\\\irnpo\\public\\Ess\\Platform\\1.9\\1.9.27\\Components\\DocumentService"
+  },
+  "SignServiceInfo": {
+    "Host": "localhost",
+    "Port": "671",
+    "SourceFolder": "\\\\irnpo\\public\\Ess\\Platform\\1.9\\1.9.27\\Components\\SignService",
+    "DBName": "Sign190"
+  },
+  "EssServiceInfo": {
+    "Host": "localhost",
+    "Port": "672",
+    "DBName": "Ess190",
+    "SourceFolder": "\\\\irnpo\\public\\Ess\\Platform\\1.9\\1.9.27\\Components\\Ess"
+  },
+  "EssSiteInfo": {
+    "Host": "localhost",
+    "Port": "674",
+    "SourceFolder": "\\\\irnpo\\public\\Ess\\Platform\\1.9\\1.9.27\\Components\\Ess"
+  },
+  "RabbitMQ": {
+    "Host": "hrpro-dev-common.rx",
+    "Port": "5672",
+    "User": "admin",
+    "Password": "11111",
+    "VirtualHost": "er_lkhost_19"
+  },
+  "EssCLIInfo": {
+    "SourceFolder": "\\\\irnpo\\public\\Ess\\Platform\\1.9\\1.9.27\\Tools"
+  }
+}
