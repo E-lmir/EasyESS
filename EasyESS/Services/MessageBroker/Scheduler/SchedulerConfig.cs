@@ -56,9 +56,6 @@ namespace EasyESS.Services.MessageBroker.Scheduler
     public class Transport
     {
         public string SmsDeliveryProxy { get; set; }
-        public string SmtpDeliveryProxy { get; set; }
-        public string ViberDeliveryProxy { get; set; }
-        public string FlashCallDeliveryProxy { get; set; }
         public Proxy[] Proxies { get; set; }
     }
 
