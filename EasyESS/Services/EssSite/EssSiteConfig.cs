@@ -1,6 +1,7 @@
-﻿namespace EasyESS.Services.EssSite
-{
+﻿using System.Xml.Serialization;
 
+namespace EasyESS.Services.EssSite
+{
     public class EssSiteConfig
     {
         public Logging Logging { get; set; }

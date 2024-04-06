@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace EasyESS.Services.EssSite
 {
-    [Serializable()]
     [System.ComponentModel.DesignerCategory("code")]
     [System.Xml.Serialization.XmlType(AnonymousType = true)]
-    [System.Xml.Serialization.XmlRoot(Namespace = "", IsNullable = false)]
+    [Serializable, XmlRoot("configuration")]
     public partial class EssSiteWebConfig
     {
         public configurationLocation location { get; set; }
