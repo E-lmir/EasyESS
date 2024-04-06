@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace EasyESS.Services.MessageBroker.Scheduler
 {
-
     public class SchedulerConfig
     {
         public Logging Logging { get; set; }
@@ -126,5 +125,4 @@ namespace EasyESS.Services.MessageBroker.Scheduler
         public string TransportProxies0ConfigurationPassword { get; set; }
         public string TransportProxies0ConfigurationSender { get; set; }
     }
-
 }
