@@ -52,41 +52,41 @@ namespace EasyESS.Services.EssSite
         {
             var configPath = Path.Combine(info.EssSiteInfo.ServiceFolder, "web.config");
             var xml = new XmlSerializer(typeof(EssSiteWebConfig));
-            using var fs = new FileStream(configPath, FileMode.OpenOrCreate);
-            var config = xml.Deserialize(fs) as EssSiteWebConfig;
-            if (config != null)
+            using (var fs = new FileStream(configPath, FileMode.OpenOrCreate))
             {
-                config.systemwebServer = new configurationSystemwebServer();
-                config.systemwebServer.rewrite = new configurationSystemwebServerRewrite();
-                config.systemwebServer.rewrite.rules = new configurationSystemwebServerRewriteRule[2];
-                config.systemwebServer.rewrite.rules[0] = new configurationSystemwebServerRewriteRule
+                var config = xml.Deserialize(fs) as EssSiteWebConfig;
+                if (config != null)
                 {
-                    name = "storage",
-                    stopProcessing = true,
-                    action = new configurationSystemwebServerRewriteRuleAction
+                    config.systemwebServer = new configurationSystemwebServer();
+                    config.systemwebServer.rewrite = new configurationSystemwebServerRewrite();
+                    config.systemwebServer.rewrite.rules = new configurationSystemwebServerRewriteRule[2];
+                    config.systemwebServer.rewrite.rules[0] = new configurationSystemwebServerRewriteRule
                     {
-                        type = "Rewrite",
-                        url = $"http://{info.StorageServiceInfo.Host}:{info.StorageServiceInfo.Port}/{{R:1}}"
-                    },
-                    match = new configurationSystemwebServerRewriteRuleMatch { url = "^storage/(.*)" }
-                };
+                        name = "storage",
+                        stopProcessing = true,
+                        action = new configurationSystemwebServerRewriteRuleAction
+                        {
+                            type = "Rewrite",
+                            url = $"http://{info.StorageServiceInfo.Host}:{info.StorageServiceInfo.Port}/{{R:1}}"
+                        },
+                        match = new configurationSystemwebServerRewriteRuleMatch { url = "^storage/(.*)" }
+                    };
 
-                config.systemwebServer.rewrite.rules[1] = new configurationSystemwebServerRewriteRule
-                {
-                    name = "api",
-                    stopProcessing = true,
-                    action = new configurationSystemwebServerRewriteRuleAction
+                    config.systemwebServer.rewrite.rules[1] = new configurationSystemwebServerRewriteRule
                     {
-                        type = "Rewrite",
-                        url = $"https://{info.EssServiceInfo.Host}:{info.EssServiceInfo.Port}/api/{{R:1}}"
-                    },
-                    match = new configurationSystemwebServerRewriteRuleMatch { url = "^api/(.*)" }
-                };
-            }
+                        name = "api",
+                        stopProcessing = true,
+                        action = new configurationSystemwebServerRewriteRuleAction
+                        {
+                            type = "Rewrite",
+                            url = $"https://{info.EssServiceInfo.Host}:{info.EssServiceInfo.Port}/api/{{R:1}}"
+                        },
+                        match = new configurationSystemwebServerRewriteRuleMatch { url = "^api/(.*)" }
+                    };
 
-            File.Delete(configPath);
-            using var fileStream = new FileStream(configPath, FileMode.OpenOrCreate);
-            xml.Serialize(fileStream, config);
+                    xml.Serialize(fs, config);
+                }
+            }         
         }
 
         public void Install(InstallationInfo info)
