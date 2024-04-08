@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EasyESS.Services.MessageBroker.Scheduler
 {
-    public class SchedulerConfig
+    internal class SchedulerConfig
     {
         public Logging Logging { get; set; }
         public Connectionstrings ConnectionStrings { get; set; }
@@ -18,12 +18,12 @@ namespace EasyESS.Services.MessageBroker.Scheduler
         public Testchecks TestChecks { get; set; }
     }
 
-    public class Logging
+    internal class Logging
     {
         public Loglevel LogLevel { get; set; }
     }
 
-    public class Loglevel
+    internal class Loglevel
     {
         public string Default { get; set; }
         public string MicrosoftEntityFrameworkCore { get; set; }
@@ -31,42 +31,42 @@ namespace EasyESS.Services.MessageBroker.Scheduler
         public string MicrosoftAspNetCore { get; set; }
     }
 
-    public class Connectionstrings
+    internal class Connectionstrings
     {
         public string Database { get; set; }
     }
 
-    public class Secrets
+    internal class Secrets
     {
         public Database Database { get; set; }
     }
 
-    public class Database
+    internal class Database
     {
         public string Username { get; set; }
         public string Password { get; set; }
     }
 
-    public class Diagnostics
+    internal class Diagnostics
     {
         public bool EnableRequestProfiling { get; set; }
         public bool EnableConfigLogging { get; set; }
     }
 
-    public class Transport
+    internal class Transport
     {
         public string SmsDeliveryProxy { get; set; }
         public Proxy[] Proxies { get; set; }
     }
 
-    public class Proxy
+    internal class Proxy
     {
         public string Name { get; set; }
         public string Type { get; set; }
         public Configuration Configuration { get; set; }
     }
 
-    public class Configuration
+    internal class Configuration
     {
         public string Host { get; set; }
         public int Port { get; set; }
@@ -84,24 +84,24 @@ namespace EasyESS.Services.MessageBroker.Scheduler
         public string Path { get; set; }
     }
 
-    public class Messageprocessingservice
+    internal class Messageprocessingservice
     {
         public int ProcessDelayMs { get; set; }
     }
 
-    public class Testchecks
+    internal class Testchecks
     {
         public Check[] Checks { get; set; }
     }
 
-    public class Check
+    internal class Check
     {
         public string name { get; set; }
         public string type { get; set; }
         public Configuration1 configuration { get; set; }
     }
 
-    public class Configuration1
+    internal class Configuration1
     {
         public string[] ValidatingFiles { get; set; }
         public Expectedvalues ExpectedValues { get; set; }
@@ -111,7 +111,7 @@ namespace EasyESS.Services.MessageBroker.Scheduler
         public string healthEndpoint { get; set; }
     }
 
-    public class Expectedvalues
+    internal class Expectedvalues
     {
         public string ConnectionStringsDatabase { get; set; }
         public string AuthenticationSigningCertificateThumbprint { get; set; }

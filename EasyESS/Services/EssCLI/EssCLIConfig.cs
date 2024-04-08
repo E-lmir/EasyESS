@@ -1,11 +1,11 @@
 ﻿namespace EasyESS.Services.EssCLI
 {
-    public class EssCLIConfig
+    internal class EssCLIConfig
     {
         public Connectionstrings ConnectionStrings { get; set; }
     }
 
-    public class Connectionstrings
+    internal class Connectionstrings
     {
         public string Database { get; set; }
     }

@@ -1,92 +1,92 @@
 ﻿namespace EasyESS.Services.SignService
 {
-    public class SignServiceConfig
+    internal class SignServiceConfig
     {
-        public Logging Logging { get; set; }
-        public string AllowedHosts { get; set; }
-        public Connectionstrings ConnectionStrings { get; set; }
-        public Authentication Authentication { get; set; }
-        public Secrets Secrets { get; set; }
-        public Cryptopro CryptoPro { get; set; }
-        public Cloudsigningservice CloudSigningService { get; set; }
-        public Konturproxy KonturProxy { get; set; }
-        public Clientratelimiting ClientRateLimiting { get; set; }
-        public Clientratelimitpolicies ClientRateLimitPolicies { get; set; }
-        public Testchecks TestChecks { get; set; }
+        internal Logging Logging { get; set; }
+        internal string AllowedHosts { get; set; }
+        internal Connectionstrings ConnectionStrings { get; set; }
+        internal Authentication Authentication { get; set; }
+        internal Secrets Secrets { get; set; }
+        internal Cryptopro CryptoPro { get; set; }
+        internal Cloudsigningservice CloudSigningService { get; set; }
+        internal Konturproxy KonturProxy { get; set; }
+        internal Clientratelimiting ClientRateLimiting { get; set; }
+        internal Clientratelimitpolicies ClientRateLimitPolicies { get; set; }
+        internal Testchecks TestChecks { get; set; }
     }
 
-    public class Logging
+    internal class Logging
     {
-        public Loglevel LogLevel { get; set; }
+        internal Loglevel LogLevel { get; set; }
     }
 
-    public class Loglevel
+    internal class Loglevel
     {
-        public string Default { get; set; }
-        public string Microsoft { get; set; }
+        internal string Default { get; set; }
+        internal string Microsoft { get; set; }
     }
 
-    public class Connectionstrings
+    internal class Connectionstrings
     {
-        public string IdentityService { get; set; }
-        public string StorageService { get; set; }
-        public string CloudSignService { get; set; }
-        public string CloudAuthService { get; set; }
+        internal string IdentityService { get; set; }
+        internal string StorageService { get; set; }
+        internal string CloudSignService { get; set; }
+        internal string CloudAuthService { get; set; }
     }
 
-    public class Authentication
+    internal class Authentication
     {
-        public string Audience { get; set; }
-        public Trustedissuer[] TrustedIssuers { get; set; }
+        internal string Audience { get; set; }
+        internal Trustedissuer[] TrustedIssuers { get; set; }
     }
 
-    public class Trustedissuer
+    internal class Trustedissuer
     {
-        public string Issuer { get; set; }
-        public string EncryptionKey { get; set; }
-        public string SigningCertificateThumbprint { get; set; }
-        public string SigningCertificatePath { get; set; }
+        internal string Issuer { get; set; }
+        internal string EncryptionKey { get; set; }
+        internal string SigningCertificateThumbprint { get; set; }
+        internal string SigningCertificatePath { get; set; }
     }
 
-    public class Secrets
+    internal class Secrets
     {
-        public string IdentityServiceUserPassword { get; set; }
+        internal string IdentityServiceUserPassword { get; set; }
     }
 
-    public class Cryptopro
+    internal class Cryptopro
     {
-        public string ClientId { get; set; }
-        public string SignServiceName { get; set; }
-        public int CaId { get; set; }
-        public string CertificateTemplate { get; set; }
-        public string OperatorLogin { get; set; }
-        public string OperatorPassword { get; set; }
-        public string HealthCheckUrl { get; set; }
-        public string Name { get; set; }
-        public string[] IdentificationTypes { get; set; }
-        public string ProviderId { get; set; }
+        internal string ClientId { get; set; }
+        internal string SignServiceName { get; set; }
+        internal int CaId { get; set; }
+        internal string CertificateTemplate { get; set; }
+        internal string OperatorLogin { get; set; }
+        internal string OperatorPassword { get; set; }
+        internal string HealthCheckUrl { get; set; }
+        internal string Name { get; set; }
+        internal string[] IdentificationTypes { get; set; }
+        internal string ProviderId { get; set; }
     }
 
-    public class Cloudsigningservice
+    internal class Cloudsigningservice
     {
-        public string ClientId { get; set; }
-        public string SignServiceName { get; set; }
-        public int CaId { get; set; }
-        public string CertificateTemplate { get; set; }
-        public string OperatorLogin { get; set; }
-        public string OperatorPassword { get; set; }
-        public string Database { get; set; }
-        public string StatementTemplateFile { get; set; }
-        public bool DisableCertificateIssueStatement { get; set; }
-        public string Name { get; set; }
-        public string[] IdentificationTypes { get; set; }
-        public string ProviderId { get; set; }
-        public string ConfirmationMessageTemplate { get; set; }
-        public string DocumentServiceConnectionString { get; set; }
-        public string MessageBrokerConnectionString { get; set; }
+        internal string ClientId { get; set; }
+        internal string SignServiceName { get; set; }
+        internal int CaId { get; set; }
+        internal string CertificateTemplate { get; set; }
+        internal string OperatorLogin { get; set; }
+        internal string OperatorPassword { get; set; }
+        internal string Database { get; set; }
+        internal string StatementTemplateFile { get; set; }
+        internal bool DisableCertificateIssueStatement { get; set; }
+        internal string Name { get; set; }
+        internal string[] IdentificationTypes { get; set; }
+        internal string ProviderId { get; set; }
+        internal string ConfirmationMessageTemplate { get; set; }
+        internal string DocumentServiceConnectionString { get; set; }
+        internal string MessageBrokerConnectionString { get; set; }
     }
 
-    public class Konturproxy
+    internal class Konturproxy
     {
         public string Name { get; set; }
         public string[] IdentificationTypes { get; set; }
@@ -94,7 +94,7 @@
         public string TenantId { get; set; }
     }
 
-    public class Clientratelimiting
+    internal class Clientratelimiting
     {
         public bool EnableEndpointRateLimiting { get; set; }
         public bool StackBlockedRequests { get; set; }
@@ -105,31 +105,31 @@
         public Generalrule[] GeneralRules { get; set; }
     }
 
-    public class Generalrule
+    internal class Generalrule
     {
         public string Endpoint { get; set; }
         public string Period { get; set; }
         public int Limit { get; set; }
     }
 
-    public class Clientratelimitpolicies
+    internal class Clientratelimitpolicies
     {
         public object[] ClientRules { get; set; }
     }
 
-    public class Testchecks
+    internal class Testchecks
     {
         public Check[] Checks { get; set; }
     }
 
-    public class Check
+    internal class Check
     {
         public string name { get; set; }
         public string type { get; set; }
         public Configuration configuration { get; set; }
     }
 
-    public class Configuration
+    internal class Configuration
     {
         public string[] ValidatingFiles { get; set; }
         public Expectedvalues ExpectedValues { get; set; }
@@ -138,7 +138,7 @@
         public string healthEndpoint { get; set; }
     }
 
-    public class Expectedvalues
+    internal class Expectedvalues
     {
         public string IdsAuthDataLogin { get; set; }
         public string IdsAuthDataPassword { get; set; }

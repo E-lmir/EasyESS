@@ -1,18 +1,18 @@
 ﻿namespace EasyESS.Services.IdCLI
 {
-    public class IdCLIConfig
+    internal class IdCLIConfig
     {
         public Connectionstrings ConnectionStrings { get; set; }
         public Passwordoptions PasswordOptions { get; set; }
         public Useroptions UserOptions { get; set; }
     }
 
-    public class Connectionstrings
+    internal class Connectionstrings
     {
         public string Database { get; set; }
     }
 
-    public class Passwordoptions
+    internal class Passwordoptions
     {
         public int RequiredLength { get; set; }
         public int RequiredUniqueChars { get; set; }
@@ -22,7 +22,7 @@
         public bool RequireDigit { get; set; }
     }
 
-    public class Useroptions
+    internal class Useroptions
     {
         public string PasswordMaxAge { get; set; }
         public string DefaultUserPassword { get; set; }
