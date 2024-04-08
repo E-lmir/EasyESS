@@ -44,10 +44,9 @@ namespace EasyESS.Services.SignService
             json.ConnectionStrings.CloudAuthService = "Name=CloudSigningService;Host=ca.foxtrot.comp.npo;Port=8007;UseSsl=false;";
             json.CryptoPro.OperatorLogin = "blazhnovvvdirectum";
             json.CryptoPro.OperatorPassword = "1Qwerty";
-            json.CryptoPro.OperatorPassword = "1Qwerty";
             json.CryptoPro.HealthCheckUrl = "http://ca.foxtrot.comp.npo:8007/health";
-            json.CloudSigningService.OperatorLogin = "Operator";
-            json.CloudSigningService.OperatorPassword = "1Qwerty";
+            json.CloudSigningService.OperatorLogin = "SignServiceOperator";
+            json.CloudSigningService.OperatorPassword = "11111";
             json.CloudSigningService.Database = $"ProviderName=System.Data.SqlClient;Data Source={info.DBServerName};Initial Catalog={info.SignServiceInfo.DBName};Integrated Security=false;User ID={info.DBServerUser};Password={info.DBServerPassword};";
             json.CloudSigningService.DocumentServiceConnectionString = $"Name=Directum.Core.DocumentService;Host={info.DocumentServiceInfo.Host};UseSsl=false;Port={info.DocumentServiceInfo.Port};";
             json.CloudSigningService.MessageBrokerConnectionString = $"Name=Directum.Core.MessageBroker;Host={info.MessagingServiceInfo.WebApi.Host};Port={info.MessagingServiceInfo.WebApi.Port};UseSsl=false;";
@@ -69,15 +68,6 @@ namespace EasyESS.Services.SignService
                 $"id assign -u \"SignServiceUser\" -r \"service\"",
                 $"id assign -u \"SignServiceOperator\" -r \"Admins\"",
                 $"id add resource \"Directum.Core.SignService\" -c \"{audiencePath}\"");
-        }
-
-        public void Install(InstallationInfo info)
-        {
-            ExtractFiles(info);
-            FillConfig(info);
-            Register(info);
-            CreateDb(info);
-            AddToIIS(info);
         }
     }
 }

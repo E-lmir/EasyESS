@@ -39,12 +39,5 @@ namespace EasyESS.Services.EssCLI
                 $"ess install {Path.Combine(info.HRRepositoryPath, "data\\EssConfig\\StatementTilesExtension.xml")} -a",
                 $"ess install {Path.Combine(info.HRRepositoryPath, "data\\EssConfig\\Vacations.xml")} -a");
         }
-
-        public void Install(InstallationInfo info)
-        {
-            ExtractFiles(info);
-            FillConfig(info);
-            Register(info);
-        }
     }
 }

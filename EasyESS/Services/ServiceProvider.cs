@@ -9,13 +9,12 @@ namespace EasyESS.Services
 {
     public static class ServiceProvider
     {
-        public static void Install<TService>(InstallationInfo info, ILogger logger = null) where TService : IService, new()
+        public static void Install<TService>(InstallationInfo info) where TService : IService, new()
         {
             var service = new TService();
             var TType = typeof(TService).ToString().Split('.').LastOrDefault();
             service.ExtractFiles(info);
             service.FillConfig(info);
-            logger?.Log("1");
             if (service is IDataAccessable dataAccessable)
                 dataAccessable.CreateDb(info);
 

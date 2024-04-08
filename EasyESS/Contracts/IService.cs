@@ -9,7 +9,6 @@ namespace EasyESS.Contracts
     public interface IService
     {
         public void ExtractFiles(InstallationInfo info);
-        public void Install(InstallationInfo info);
         public void FillConfig(InstallationInfo info);
     }
 }

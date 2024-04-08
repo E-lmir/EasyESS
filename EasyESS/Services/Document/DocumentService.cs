@@ -45,13 +45,5 @@ namespace EasyESS.Services.Document
             file = JsonConvert.SerializeObject(json, Formatting.Indented);
             File.WriteAllText(configPath, file);
         }
-
-        public void Install(InstallationInfo info)
-        {
-            ExtractFiles(info);
-            FillConfig(info);
-            AddToIIS(info);
-            Register(info);
-        }
     }
 }

@@ -50,14 +50,5 @@ namespace EasyESS.Services.IdentityService
                 $"appcmd add site /name:Identity{info.InstanceTag} /physicalPath:{info.IdentityServiceInfo.ServiceFolder} /bindings:https/*:{info.IdentityServiceInfo.Port}:", 
                 $"APPCMD.exe set app \"Identity{info.InstanceTag}/\" /applicationPool:\"Identity{info.InstanceTag}\"");
         }
-
-        public void Install(InstallationInfo info)
-        {
-            ExtractFiles(info);
-            FillConfig(info);
-            CreateDb(info);
-            CreateDb(info);
-            AddToIIS(info);
-        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using CommandExecutor;
+using EasyESS.Contracts;
 using EasyESS.Services.IdentityService;
 using EasyESS.Services.MessageBroker.WebApiService;
 using Newtonsoft.Json;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace EasyESS.Services.MessageBroker.Scheduler
 {
-    public class SchedulerService
+    public class SchedulerService : IService, IHostable 
     {
         public void ExtractFiles(InstallationInfo info)
         {
@@ -46,13 +47,6 @@ namespace EasyESS.Services.MessageBroker.Scheduler
             json.Transport.Proxies[0].Configuration.Sender = "DIDSMS";
             file = JsonConvert.SerializeObject(json, Formatting.Indented);
             File.WriteAllText(configPath, file);
-        }
-
-        public void Install(InstallationInfo info)
-        {
-            ExtractFiles(info);
-            AddToIIS(info);
-            FillConfig(info);
         }
     }
 }

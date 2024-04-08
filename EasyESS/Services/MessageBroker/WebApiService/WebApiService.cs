@@ -1,4 +1,5 @@
 ﻿using CommandExecutor;
+using EasyESS.Contracts;
 using EasyESS.Services.IdentityService;
 using Newtonsoft.Json;
 using System;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace EasyESS.Services.MessageBroker.WebApiService
 {
-    public class WebApiService
+    public class WebApiService : IService, IDataAccessable, IHostable, IRegistrable
     {
         public void CreateDb(InstallationInfo info)
         {
@@ -48,22 +49,13 @@ namespace EasyESS.Services.MessageBroker.WebApiService
             File.WriteAllText(configPath, file);
         }
 
-        public void IdCLIRegistration(InstallationInfo info)
+        public void Register(InstallationInfo info)
         {
             var executor = new CommandLineExecutor();
             var audiencePath = Path.Combine(info.MessagingServiceInfo.SourceFolder, "MessageBrokerAudience.json");
             executor.Execute($"{info.IdCLIServiceInfo.ServiceFolder.Substring(0, 2)}", 
                 $"cd {info.IdCLIServiceInfo.ServiceFolder}", 
                 $"id add resource \"Directum.Core.MessageBroker\" -c \"{audiencePath}\"");
-        }
-
-        public void Install(InstallationInfo info)
-        {
-            CreateDb(info);
-            ExtractFiles(info);
-            AddToIIS(info);
-            FillConfig(info);
-            IdCLIRegistration(info);
         }
     }
 }
