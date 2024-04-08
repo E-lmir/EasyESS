@@ -1,7 +1,7 @@
 ﻿namespace EasyESS.Services.Document
 {
 
-    internal class DocumentConfig
+    public class DocumentConfig
     {
         public Logging Logging { get; set; }
         public string AllowedHosts { get; set; }
@@ -13,30 +13,30 @@
         public string[] RetryPolicyIntervals { get; set; }
     }
 
-    internal class Logging
+    public class Logging
     {
         public Loglevel LogLevel { get; set; }
     }
 
-    internal class Loglevel
+    public class Loglevel
     {
         public string Default { get; set; }
         public string Microsoft { get; set; }
         public string MicrosoftHostingLifetime { get; set; }
     }
 
-    internal class Connectionstrings
+    public class Connectionstrings
     {
         public string IdentityService { get; set; }
         public string StorageService { get; set; }
     }
 
-    internal class Globalization
+    public class Globalization
     {
         public string DefaultCulture { get; set; }
     }
 
-    internal class Diagnostics
+    public class Diagnostics
     {
         public bool EnableRequestProfiling { get; set; }
         public bool EnableConfigLogging { get; set; }
@@ -44,21 +44,21 @@
         public Filelogoutput FileLogOutput { get; set; }
     }
 
-    internal class Filelogoutput
+    public class Filelogoutput
     {
         public string Format { get; set; }
         public string Directory { get; set; }
         public string File { get; set; }
     }
 
-    internal class Authentication
+    public class Authentication
     {
         public string TrustedIssuer { get; set; }
         public string Audience { get; set; }
         public string SigningCertificateThumbprint { get; set; }
     }
 
-    internal class Caching
+    public class Caching
     {
         public string CacheDirectory { get; set; }
         public string CacheLifetime { get; set; }

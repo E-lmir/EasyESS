@@ -2,7 +2,7 @@
 
 namespace EasyESS.Services.EssSite
 {
-    internal class EssSiteConfig
+    public class EssSiteConfig
     {
         public Logging Logging { get; set; }
         public string AllowedHosts { get; set; }
@@ -17,12 +17,12 @@ namespace EasyESS.Services.EssSite
         public Reverseproxy ReverseProxy { get; set; }
     }
 
-    internal class Logging
+    public class Logging
     {
         public Loglevel LogLevel { get; set; }
     }
 
-    internal class Loglevel
+    public class Loglevel
     {
         public string Default { get; set; }
         public string Microsoft { get; set; }
@@ -30,30 +30,30 @@ namespace EasyESS.Services.EssSite
         public string MicrosoftHostingLifetime { get; set; }
     }
 
-    internal class Connectionstrings
+    public class Connectionstrings
     {
         public string IdentityService { get; set; }
         public string OfficeService { get; set; }
     }
 
-    internal class General
+    public class General
     {
         public bool EmbeddedMode { get; set; }
         public string CompressionLevel { get; set; }
     }
 
-    internal class Globalization
+    public class Globalization
     {
         public string DefaultCulture { get; set; }
         public Availablelanguages AvailableLanguages { get; set; }
     }
 
-    internal class Availablelanguages
+    public class Availablelanguages
     {
         public string ru { get; set; }
     }
 
-    internal class Authentication
+    public class Authentication
     {
         public string Audience { get; set; }
         public string ReturnUrl { get; set; }
@@ -62,7 +62,7 @@ namespace EasyESS.Services.EssSite
         public string SigningCertificateThumbprint { get; set; }
     }
 
-    internal class Clientconfiguration
+    public class Clientconfiguration
     {
         public string ServiceEndpoint { get; set; }
         public string ServiceAudience { get; set; }
@@ -87,131 +87,131 @@ namespace EasyESS.Services.EssSite
         public string SupportContacts { get; set; }
     }
 
-    internal class Diagnostics
+    public class Diagnostics
     {
         public bool EnableConfigLogging { get; set; }
         public string HealthCheckTimeout { get; set; }
     }
 
-    internal class Reverseproxy
+    public class Reverseproxy
     {
         public bool Enabled { get; set; }
         public Routes Routes { get; set; }
         public Clusters Clusters { get; set; }
     }
 
-    internal class Routes
+    public class Routes
     {
         public Storageservice StorageService { get; set; }
         public Previewstorage PreviewStorage { get; set; }
         public Officeservice OfficeService { get; set; }
     }
 
-    internal class Storageservice
+    public class Storageservice
     {
         public string ClusterId { get; set; }
         public Match Match { get; set; }
         public Transform[] Transforms { get; set; }
     }
 
-    internal class Match
+    public class Match
     {
         public string Path { get; set; }
     }
 
-    internal class Transform
+    public class Transform
     {
         public string PathRemovePrefix { get; set; }
         public string RequestHeaderRemove { get; set; }
     }
 
-    internal class Previewstorage
+    public class Previewstorage
     {
         public string ClusterId { get; set; }
         public Match1 Match { get; set; }
         public Transform1[] Transforms { get; set; }
     }
 
-    internal class Match1
+    public class Match1
     {
         public string Path { get; set; }
     }
 
-    internal class Transform1
+    public class Transform1
     {
         public string PathRemovePrefix { get; set; }
     }
 
-    internal class Officeservice
+    public class Officeservice
     {
         public string ClusterId { get; set; }
         public Match2 Match { get; set; }
         public Transform2[] Transforms { get; set; }
     }
 
-    internal class Match2
+    public class Match2
     {
         public string Path { get; set; }
     }
 
-    internal class Transform2
+    public class Transform2
     {
         public string PathRemovePrefix { get; set; }
     }
 
-    internal class Clusters
+    public class Clusters
     {
         public Storageservice1 StorageService { get; set; }
         public Previewstorage1 PreviewStorage { get; set; }
         public Officeservice1 OfficeService { get; set; }
     }
 
-    internal class Storageservice1
+    public class Storageservice1
     {
         public Destinations Destinations { get; set; }
     }
 
-    internal class Destinations
+    public class Destinations
     {
         public Storageservice2 StorageService { get; set; }
     }
 
-    internal class Storageservice2
+    public class Storageservice2
     {
         public string Address { get; set; }
     }
 
-    internal class Previewstorage1
+    public class Previewstorage1
     {
         public Destinations1 Destinations { get; set; }
     }
 
-    internal class Destinations1
+    public class Destinations1
     {
         public Previewstorage2 PreviewStorage { get; set; }
     }
 
-    internal class Previewstorage2
+    public class Previewstorage2
     {
         public string Address { get; set; }
     }
 
-    internal class Officeservice1
+    public class Officeservice1
     {
         public Destinations2 Destinations { get; set; }
     }
 
-    internal class Destinations2
+    public class Destinations2
     {
         public Officeservice2 OfficeService { get; set; }
     }
 
-    internal class Officeservice2
+    public class Officeservice2
     {
         public string Address { get; set; }
     }
 
-    internal class Signprovider
+    public class Signprovider
     {
         public string Name { get; set; }
         public string Title { get; set; }

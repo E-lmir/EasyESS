@@ -1,7 +1,7 @@
 ﻿namespace EasyESS.Services.MessageBroker.WebApiService
 {
 
-    internal class WebApiConfig
+    public class WebApiConfig
     {
         public Logging Logging { get; set; }
         public string AllowedHosts { get; set; }
@@ -13,36 +13,36 @@
         public Scheduler Scheduler { get; set; }
     }
 
-    internal class Logging
+    public class Logging
     {
         public Loglevel LogLevel { get; set; }
     }
 
-    internal class Loglevel
+    public class Loglevel
     {
         public string Default { get; set; }
         public string MicrosoftEntityFrameworkCore { get; set; }
         public string MicrosoftAspNetCore { get; set; }
     }
 
-    internal class Diagnostics
+    public class Diagnostics
     {
-        internal bool EnableRequestProfiling { get; set; }
-        internal bool EnableConfigLogging { get; set; }
-        internal bool EnableAuditLogging { get; set; }
-        internal string LogOutputs { get; set; }
-        internal Filelogoutput FileLogOutput { get; set; }
-        internal Elasticsearchlogoutput ElasticSearchLogOutput { get; set; }
+        public bool EnableRequestProfiling { get; set; }
+        public bool EnableConfigLogging { get; set; }
+        public bool EnableAuditLogging { get; set; }
+        public string LogOutputs { get; set; }
+        public Filelogoutput FileLogOutput { get; set; }
+        public Elasticsearchlogoutput ElasticSearchLogOutput { get; set; }
     }
 
-    internal class Filelogoutput
+    public class Filelogoutput
     {
         public string Format { get; set; }
         public string Directory { get; set; }
         public string File { get; set; }
     }
 
-    internal class Elasticsearchlogoutput
+    public class Elasticsearchlogoutput
     {
         public string ServiceAddress { get; set; }
         public string Index { get; set; }
@@ -50,35 +50,35 @@
         public string ApiKey { get; set; }
     }
 
-    internal class Connectionstrings
+    public class Connectionstrings
     {
         public string Database { get; set; }
     }
 
-    internal class Secrets
+    public class Secrets
     {
         public Database Database { get; set; }
     }
 
-    internal class Database
+    public class Database
     {
         public string Username { get; set; }
         public string Password { get; set; }
     }
 
-    internal class Authentication
+    public class Authentication
     {
         public string TrustedIssuer { get; set; }
         public string Audience { get; set; }
         public string SigningCertificateThumbprint { get; set; }
     }
 
-    internal class Messaging
+    public class Messaging
     {
         public string DefaultMessageExpirationPeriod { get; set; }
     }
 
-    internal class Scheduler
+    public class Scheduler
     {
         public string HealthCheckUrl { get; set; }
     }

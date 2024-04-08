@@ -1,6 +1,6 @@
 ﻿namespace EasyESS.Services.IdentityService
 {
-    internal class IdentityConfig
+    public class IdentityConfig
     {
         public Logging Logging { get; set; }
         public Tracing Tracing { get; set; }
@@ -21,19 +21,19 @@
         public Accountenrichment AccountEnrichment { get; set; }
     }
 
-    internal class Logging
+    public class Logging
     {
         public Loglevel LogLevel { get; set; }
     }
 
-    internal class Loglevel
+    public class Loglevel
     {
         public string Default { get; set; }
         public string Microsoft { get; set; }
         public string MicrosoftHostingLifetime { get; set; }
     }
 
-    internal class Tracing
+    public class Tracing
     {
         public bool Enabled { get; set; }
         public string ServiceName { get; set; }
@@ -41,20 +41,20 @@
         public int AgentPort { get; set; }
     }
 
-    internal class Iissettings
+    public class Iissettings
     {
         public bool windowsAuthentication { get; set; }
         public bool anonymousAuthentication { get; set; }
     }
 
-    internal class Connectionstrings
+    public class Connectionstrings
     {
         public string Database { get; set; }
         public string MessagingService { get; set; }
         public string ShortPathService { get; set; }
     }
 
-    internal class General
+    public class General
     {
         public bool EnableDemoMode { get; set; }
         public string ServiceEndpoint { get; set; }
@@ -64,7 +64,7 @@
         public object ShortPathExpirationPeriod { get; set; }
     }
 
-    internal class Diagnostics
+    public class Diagnostics
     {
         public bool EnableRequestProfiling { get; set; }
         public bool EnableSettingsLogging { get; set; }
@@ -72,29 +72,29 @@
         public Filelogoutput FileLogOutput { get; set; }
     }
 
-    internal class Filelogoutput
+    public class Filelogoutput
     {
         public string Format { get; set; }
         public string Directory { get; set; }
         public string File { get; set; }
     }
 
-    internal class Cachevalidationservice
+    public class Cachevalidationservice
     {
         public int ProcessDelayMs { get; set; }
     }
 
-    internal class Retrypolicy
+    public class Retrypolicy
     {
         public string[] RetryPolicyIntervals { get; set; }
     }
 
-    internal class Globalization
+    public class Globalization
     {
         public string DefaultCulture { get; set; }
     }
 
-    internal class Accountmanagement
+    public class Accountmanagement
     {
         public bool AllowAccountRegister { get; set; }
         public bool AllowPhoneNumberUpdates { get; set; }
@@ -102,14 +102,14 @@
         public bool AllowUserPhotoUpdates { get; set; }
     }
 
-    internal class Tokenissuer
+    public class Tokenissuer
     {
         public string Issuer { get; set; }
         public string SigningCertificateThumbprint { get; set; }
         public int LifetimeMins { get; set; }
     }
 
-    internal class Useraccounts
+    public class Useraccounts
     {
         public string DefaultAuthentication { get; set; }
         public string DefaultDomain { get; set; }
@@ -134,7 +134,7 @@
         public string CodeResendingInterval { get; set; }
     }
 
-    internal class Passwords
+    public class Passwords
     {
         public int RequiredLength { get; set; }
         public int RequiredUniqueChars { get; set; }
@@ -144,22 +144,22 @@
         public bool RequireDigit { get; set; }
     }
 
-    internal class Authentication
+    public class Authentication
     {
         public object[] Providers { get; set; }
     }
 
-    internal class Uservalidation
+    public class Uservalidation
     {
         public object[] Validators { get; set; }
     }
 
-    internal class Accountenrichment
+    public class Accountenrichment
     {
         public Provider[] Providers { get; set; }
     }
 
-    internal class Provider
+    public class Provider
     {
         public string Name { get; set; }
         public string Type { get; set; }
@@ -168,7 +168,7 @@
         public Configuration Configuration { get; set; }
     }
 
-    internal class Configuration
+    public class Configuration
     {
         public string IntegrationServiceEndpoint { get; set; }
         public string ServiceUsername { get; set; }

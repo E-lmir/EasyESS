@@ -1,7 +1,7 @@
 ﻿namespace EasyESS.Services.EssService
 {
 
-    internal class EssServiceConfig
+    public class EssServiceConfig
     {
         public Logging Logging { get; set; }
         public string AllowedHosts { get; set; }
@@ -14,19 +14,19 @@
         public string[] RetryPolicyIntervals { get; set; }
     }
 
-    internal class Logging
+    public class Logging
     {
         public Loglevel LogLevel { get; set; }
     }
 
-    internal class Loglevel
+    public class Loglevel
     {
         public string Default { get; set; }
         public string Microsoft { get; set; }
         public string MicrosoftHostingLifetime { get; set; }
     }
 
-    internal class Connectionstrings
+    public class Connectionstrings
     {
         public string Database { get; set; }
         public string RabbitMQ { get; set; }
@@ -39,7 +39,7 @@
         public string DocumentService { get; set; }
     }
 
-    internal class Authentication
+    public class Authentication
     {
         public string TrustedIssuer { get; set; }
         public string Audience { get; set; }
@@ -47,22 +47,22 @@
         public string SigningCertificateThumbprint { get; set; }
     }
 
-    internal class Facilityflowprocessingservice
+    public class Facilityflowprocessingservice
     {
         public int ProcessDelayMs { get; set; }
     }
 
-    internal class Cachevalidationservice
+    public class Cachevalidationservice
     {
         public int ProcessDelayMs { get; set; }
     }
 
-    internal class Globalization
+    public class Globalization
     {
         public string DefaultCulture { get; set; }
     }
 
-    internal class Diagnostics
+    public class Diagnostics
     {
         public bool EnableRequestProfiling { get; set; }
         public string HealthCheckTimeout { get; set; }
@@ -71,7 +71,7 @@
         public Filelogoutput FileLogOutput { get; set; }
     }
 
-    internal class Filelogoutput
+    public class Filelogoutput
     {
         public string Format { get; set; }
         public string Directory { get; set; }
