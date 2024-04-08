@@ -5,7 +5,7 @@ using System.IO.Compression;
 
 namespace EasyESS.Services.SignService
 {
-    public class SignService : IService, IDataAccessable, IRegistrable, IHostable
+    public class SignService : IService, IDataAccessable, IHostable
     {
         public void ExtractFiles(InstallationInfo info)
         {
@@ -53,21 +53,6 @@ namespace EasyESS.Services.SignService
             json.Authentication.TrustedIssuers[0].SigningCertificateThumbprint = info.SigningCertificateThumbprint;
             file = JsonConvert.SerializeObject(json, Formatting.Indented);
             File.WriteAllText(configPath, file);
-        }
-
-        public void Register(InstallationInfo info)
-        {
-            var executor = new CommandLineExecutor();
-            var audiencePath = Path.Combine(info.SignServiceInfo.SourceFolder, "SignServiceAudience.json");
-            executor.Execute($"{info.IdCLIServiceInfo.ServiceFolder.Substring(0, 2)}", 
-                $"cd {info.IdCLIServiceInfo.ServiceFolder}",
-                $"id add user \"SignServiceUser\" -p password=\"11111\"",
-                $"id add user \"SignServiceOperator\" -p password=\"11111\"",
-                $"id add role \"Admins\"",
-                $"id add role \"Users\"",
-                $"id assign -u \"SignServiceUser\" -r \"service\"",
-                $"id assign -u \"SignServiceOperator\" -r \"Admins\"",
-                $"id add resource \"Directum.Core.SignService\" -c \"{audiencePath}\"");
         }
     }
 }

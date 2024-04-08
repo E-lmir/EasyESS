@@ -2,6 +2,7 @@
 using EasyESS.Contracts;
 using Newtonsoft.Json;
 using System.IO.Compression;
+using System.Runtime.CompilerServices;
 
 namespace EasyESS.Services.Storage
 {

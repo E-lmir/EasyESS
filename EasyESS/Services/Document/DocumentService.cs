@@ -5,7 +5,7 @@ using System.IO.Compression;
 
 namespace EasyESS.Services.Document
 {
-    public class DocumentService : IService, IRegistrable, IHostable
+    public class DocumentService : IService, IHostable
     {
         public void ExtractFiles(InstallationInfo info)
         {
@@ -21,17 +21,6 @@ namespace EasyESS.Services.Document
                 $"appcmd add apppool /name:Document{info.InstanceTag} /managedRuntimeVersion: /managedPipelineMode:Integrated", 
                 $"appcmd add site /name:Document{info.InstanceTag} /physicalPath:{info.DocumentServiceInfo.ServiceFolder} /bindings:http/*:{info.DocumentServiceInfo.Port}:", 
                 $"APPCMD.exe set app \"Document{info.InstanceTag}/\" /applicationPool:\"Document{info.InstanceTag}\"");
-        }
-
-        public void Register(InstallationInfo info)
-        {
-            var executor = new CommandLineExecutor();
-            var audiencePath = Path.Combine(info.DocumentServiceInfo.SourceFolder, "DocumentServiceAudience.json");
-            executor.Execute($"{info.IdCLIServiceInfo.ServiceFolder.Substring(0, 2)}",
-                $"cd {info.IdCLIServiceInfo.ServiceFolder}",
-                $"id add user \"DocServiceUser\" -p password=\"11111\"",
-                $"id assign -u \"DocServiceUser\" -r \"service\"",
-                $"id add resource \"Directum.Core.DocumentService\" -c \"{audiencePath}\"");
         }
 
         public void FillConfig(InstallationInfo info)

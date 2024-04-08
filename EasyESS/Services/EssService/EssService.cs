@@ -5,7 +5,7 @@ using System.IO.Compression;
 
 namespace EasyESS.Services.EssService
 {
-    public class EssService : IService, IDataAccessable, IRegistrable, IHostable
+    public class EssService : IService, IDataAccessable, IHostable
     {
         public void CreateDb(InstallationInfo info)
         {
@@ -14,17 +14,6 @@ namespace EasyESS.Services.EssService
             executor.Execute(@$"cd {info.SQLCmdPath}", $"sqlcmd -U {info.DBServerUser} -P {info.DBServerPassword} -S {info.DBServerName} -Q \"CREATE DATABASE {info.EssServiceInfo.DBName}\"");
             var dbScriptPath = Path.Combine(info.EssServiceInfo.SourceFolder, "DatabaseScripts\\SqlServer\\InitializeDatabase.sql");
             executor.Execute(@$"cd {info.SQLCmdPath}", $"sqlcmd -U {info.DBServerUser} -P {info.DBServerPassword} -S {info.DBServerName} -d {info.EssServiceInfo.DBName} -i {dbScriptPath}");
-        }
-
-        public void Register(InstallationInfo info)
-        {
-            var executor = new CommandLineExecutor();
-            var audiencePath = Path.Combine(info.EssServiceInfo.SourceFolder, "EssServiceAudience.json");
-            executor.Execute($"{info.IdCLIServiceInfo.ServiceFolder.Substring(0, 2)}", 
-            $"cd {info.IdCLIServiceInfo.ServiceFolder}", 
-            $"id add user \"EssServiceUser\" -p password=\"11111\"", 
-            $"id assign -u \"EssServiceUser\" -r \"service\"",
-            $"id add resource \"Directum.Core.EssService\" -c \"{audiencePath}\" -p icon=\"https://{info.EssSiteInfo.Host}:{info.EssSiteInfo.Port}/logo_32.png\"");
         }
 
         public void ExtractFiles(InstallationInfo info)

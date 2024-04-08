@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace EasyESS.Services.MessageBroker.WebApiService
 {
-    public class WebApiService : IService, IDataAccessable, IHostable, IRegistrable
+    public class WebApiService : IService, IDataAccessable, IHostable
     {
         public void CreateDb(InstallationInfo info)
         {
@@ -47,15 +47,6 @@ namespace EasyESS.Services.MessageBroker.WebApiService
             json.Scheduler.HealthCheckUrl = $"http://{info.MessagingServiceInfo.Scheduler.Host}:{info.MessagingServiceInfo.Scheduler.Port}/health";
             file = JsonConvert.SerializeObject(json, Formatting.Indented);
             File.WriteAllText(configPath, file);
-        }
-
-        public void Register(InstallationInfo info)
-        {
-            var executor = new CommandLineExecutor();
-            var audiencePath = Path.Combine(info.MessagingServiceInfo.SourceFolder, "MessageBrokerAudience.json");
-            executor.Execute($"{info.IdCLIServiceInfo.ServiceFolder.Substring(0, 2)}", 
-                $"cd {info.IdCLIServiceInfo.ServiceFolder}", 
-                $"id add resource \"Directum.Core.MessageBroker\" -c \"{audiencePath}\"");
         }
     }
 }

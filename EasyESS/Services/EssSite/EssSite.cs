@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace EasyESS.Services.EssSite
 {
-    public class EssSite : IService, IRegistrable, IHostable, IConfigurable
+    public class EssSite : IService, IHostable, IConfigurable
     {
         public void ExtractFiles(InstallationInfo info)
         {
@@ -37,15 +37,6 @@ namespace EasyESS.Services.EssSite
             json.ReverseProxy.Routes.StorageService.Transforms = null;
             file = JsonConvert.SerializeObject(json, Newtonsoft.Json.Formatting.Indented);
             File.WriteAllText(configPath, file);
-        }
-
-        public void Register(InstallationInfo info)
-        {
-            var executor = new CommandLineExecutor();
-            var audiencePath = Path.Combine(info.EssServiceInfo.SourceFolder, "EssSiteAudience.json");
-            executor.Execute($"{info.IdCLIServiceInfo.ServiceFolder.Substring(0, 2)}", 
-                $"cd {info.IdCLIServiceInfo.ServiceFolder}",
-                $"id add resource \"Directum.Core.EssSite\" -c \"{audiencePath}\" -p returnUrl=\"https://{info.EssSiteInfo.Host}:{info.EssSiteInfo.Port}\" -p originUrl=\"https://{info.EssSiteInfo.Host}:{info.EssSiteInfo.Port}\" -p icon=\"https://{info.EssSiteInfo.Host}:{info.EssSiteInfo.Port}/logo_32.png\"");
         }
 
         public void Configure(InstallationInfo info)
