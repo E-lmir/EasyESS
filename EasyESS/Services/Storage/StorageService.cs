@@ -2,11 +2,10 @@
 using EasyESS.Contracts;
 using Newtonsoft.Json;
 using System.IO.Compression;
-using System.Runtime.CompilerServices;
 
 namespace EasyESS.Services.Storage
 {
-    public class StorageService : IService, IRegistrable, IHostable
+    public class StorageService : IService, IHostable
     {
         public void ExtractFiles(InstallationInfo info)
         {
@@ -35,15 +34,6 @@ namespace EasyESS.Services.Storage
             json.Authentication.SigningCertificateThumbprint = info.SigningCertificateThumbprint;
             file = JsonConvert.SerializeObject(json, Formatting.Indented);
             File.WriteAllText(configPath, file);
-        }
-
-        public void Register(InstallationInfo info)
-        {
-            var executor = new CommandLineExecutor();
-            var audiencePath = Path.Combine(info.StorageServiceInfo.SourceFolder, "BlobStorageServiceAudience.json");
-            executor.Execute($"{info.IdCLIServiceInfo.ServiceFolder.Substring(0, 2)}", 
-                $"cd {info.IdCLIServiceInfo.ServiceFolder}",
-                $"id add resource \"Directum.Core.BlobStorageService\" -c \"{audiencePath}\"");
         }
     }
 }
