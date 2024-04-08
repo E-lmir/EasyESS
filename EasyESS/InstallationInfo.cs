@@ -34,10 +34,10 @@ namespace EasyESS
 
     public sealed class IdentityServiceInfo
     {
-        public string SourceFolder {  get; set; }
-        public string DBName { get; set; }
         public string Host { get; set; }
         public string Port { get; set; }
+        public string SourceFolder {  get; set; }
+        public string DBName { get; set; }
         [JsonIgnore]
         public string ServiceFolder { get; set; }
     }
@@ -76,11 +76,11 @@ namespace EasyESS
     public sealed class StorageServiceInfo
     {
         public string Host { get; set; }
-        public string SourceFolder { get; set; }
         public string Port { get; set; }
+        public string SourceFolder { get; set; }
+        public string FileStoragePath { get; set; }
         [JsonIgnore]
         public string ServiceFolder { get; set; }
-        public string FileStoragePath { get; set; }
     }
 
     public sealed class DocumentServiceInfo
@@ -96,8 +96,8 @@ namespace EasyESS
     {
         public string Host { get; set; }
         public string Port { get; set; }
-        public string DBName { get; set; }
         public string SourceFolder { get; set; }
+        public string DBName { get; set; }
         [JsonIgnore]
         public string ServiceFolder { get; set; }
     }
@@ -106,8 +106,8 @@ namespace EasyESS
     {
         public string Host { get; set; }
         public string Port { get; set; }
-        public string DBName { get; set; }
         public string SourceFolder { get; set; }
+        public string DBName { get; set; }
         [JsonIgnore]
         public string ServiceFolder { get; set; }
     }
