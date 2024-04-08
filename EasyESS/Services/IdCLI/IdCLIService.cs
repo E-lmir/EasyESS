@@ -30,12 +30,5 @@ namespace EasyESS.Services.IdCLI
                 $"cd {info.IdCLIServiceInfo.ServiceFolder}", 
                 $"id add role \"service\"");
         }
-
-        public void Install(InstallationInfo info)
-        {
-            ExtractFiles(info);
-            FillConfig(info);
-            Register(info);
-        }
     }
 }

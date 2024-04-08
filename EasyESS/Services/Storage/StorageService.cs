@@ -44,13 +44,5 @@ namespace EasyESS.Services.Storage
                 $"cd {info.IdCLIServiceInfo.ServiceFolder}",
                 $"id add resource \"Directum.Core.BlobStorageService\" -c \"{audiencePath}\"");
         }
-
-        public void Install(InstallationInfo info)
-        {
-            ExtractFiles(info);
-            AddToIIS(info);
-            FillConfig(info);
-            Register(info);
-        }
     }
 }

@@ -61,14 +61,5 @@ namespace EasyESS.Services.EssService
                 $"appcmd add site /name:EssService{info.InstanceTag} /physicalPath:{info.EssServiceInfo.ServiceFolder} /bindings:https/*:{info.EssServiceInfo.Port}:", 
                 $"APPCMD.exe set app \"EssService{info.InstanceTag}/\" /applicationPool:\"EssService{info.InstanceTag}\"");
         }
-
-        public void Install(InstallationInfo info)
-        {
-            ExtractFiles(info);
-            CreateDb(info);
-            Register(info);
-            FillConfig(info);
-            AddToIIS(info);
-        }
     }
 }

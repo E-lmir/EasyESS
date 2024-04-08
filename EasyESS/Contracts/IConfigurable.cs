@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace EasyESS.Contracts
 {
-    public interface IService
+    internal interface IConfigurable
     {
-        public void ExtractFiles(InstallationInfo info);
-        public void FillConfig(InstallationInfo info);
+        internal void Configure(InstallationInfo info);
     }
 }

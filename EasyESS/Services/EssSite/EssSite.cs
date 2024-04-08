@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace EasyESS.Services.EssSite
 {
-    public class EssSite : IService, IRegistrable, IHostable
+    public class EssSite : IService, IRegistrable, IHostable, IConfigurable
     {
         public void ExtractFiles(InstallationInfo info)
         {
@@ -48,11 +48,11 @@ namespace EasyESS.Services.EssSite
                 $"id add resource \"Directum.Core.EssSite\" -c \"{audiencePath}\" -p returnUrl=\"https://{info.EssSiteInfo.Host}:{info.EssSiteInfo.Port}\" -p originUrl=\"https://{info.EssSiteInfo.Host}:{info.EssSiteInfo.Port}\" -p icon=\"https://{info.EssSiteInfo.Host}:{info.EssSiteInfo.Port}/logo_32.png\"");
         }
 
-        public void FillWebConfig(InstallationInfo info)
+        public void Configure(InstallationInfo info)
         {
             var configPath = Path.Combine(info.EssSiteInfo.ServiceFolder, "web.config");
             var xml = new XmlSerializer(typeof(EssSiteWebConfig));
-            EssSiteWebConfig config = null;
+            EssSiteWebConfig? config = null;
             using (var fs = new FileStream(configPath, FileMode.OpenOrCreate))
             {
                 config = xml.Deserialize(fs) as EssSiteWebConfig;
@@ -93,15 +93,6 @@ namespace EasyESS.Services.EssSite
             {
                 xml.Serialize(fs, config);
             }
-        }
-
-        public void Install(InstallationInfo info)
-        {
-            ExtractFiles(info);
-            FillConfig(info);
-            Register(info);
-            AddToIIS(info);
-            FillWebConfig(info);
         }
     }
 }
